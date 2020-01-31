@@ -1,23 +1,23 @@
 package ir.aliiz.chortka.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import ir.aliiz.chortka.local.model.Hashtag
+import ir.aliiz.chortka.local.model.TransactionHashtag
 import ir.aliiz.chortka.local.model.TransactionInfo
-import ir.aliiz.chortka.local.model.TransactionWithHashtag
 
 @Dao
 interface TransactionDao {
     @Insert
     fun addTransaction(param: TransactionInfo)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addHashtag(param: Hashtag)
 
+    @Insert
+    fun addTransactionHashtag(param: TransactionHashtag)
+
     @Query("select * from TransactionInfo")
-    fun getTransactions(): List<TransactionWithHashtag>
+    fun getTransactions(): List<TransactionInfo>
 
     @Query("select * from Hashtag")
     fun getHashtags(): List<Hashtag>
@@ -27,4 +27,7 @@ interface TransactionDao {
 
     @Insert
     fun insertHashtag(param: Hashtag)
+
+    @Query("select title from TransactionHashtag inner join Hashtag on TransactionHashtag.hashtagTitle = Hashtag.title where TransactionHashtag.transactionId = :id")
+    fun getTransactionHashtags(id: String): List<String>
 }

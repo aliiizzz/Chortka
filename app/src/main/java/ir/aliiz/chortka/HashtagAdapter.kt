@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.aliiz.chortka.domain.model.HashtagDomain
 import kotlinx.android.synthetic.main.hashtag_item.view.*
 
-class HashtagAdapter(val clickListener: (id: Long, type: Int) -> Unit): RecyclerView.Adapter<HashtagViewHolder>() {
+class HashtagAdapter(val clickListener: (title: String, type: Int) -> Unit): RecyclerView.Adapter<HashtagViewHolder>() {
     var items: List<HashtagDomain> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HashtagViewHolder =
         HashtagViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.hashtag_item, parent, false)).apply {
             itemView.image_button_minus.setOnClickListener {
                 val item = items[this.adapterPosition]
-                clickListener.invoke(item.id, 2)
+                clickListener.invoke(item.title, 2)
             }
 
             itemView.image_button_plus.setOnClickListener {
                 val item = items[this.adapterPosition]
-                clickListener.invoke(item.id, 1)
+                clickListener.invoke(item.title, 1)
             }
         }
 

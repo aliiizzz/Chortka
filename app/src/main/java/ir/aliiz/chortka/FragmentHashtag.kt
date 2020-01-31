@@ -22,8 +22,8 @@ class FragmentHashtag : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = HashtagAdapter { id, type ->
-            updateHashtag(id, type)
+        adapter = HashtagAdapter { title, type ->
+            updateHashtag(title, type)
         }
         (activity!!.applicationContext as App).component.apply {
             inject(this@FragmentHashtag)
@@ -53,14 +53,14 @@ class FragmentHashtag : Fragment() {
         }
     }
 
-    private fun updateHashtag(id: Long, type: Int) {
+    private fun updateHashtag(title: String, type: Int) {
         CoroutineScope(Dispatchers.Main).launch {
-            val item = adapter.items.first { it.id == id }.copy(type = type)
+            val item = adapter.items.first { it.title == title }.copy(type = type)
             withContext(Dispatchers.IO) {
                 transactionRepo.updateHashtag(item)
             }
             val items = adapter.items.toMutableList().apply {
-                this[this.indexOfFirst { it.id == id }] = item
+                this[this.indexOfFirst { it.title == title }] = item
             }.toList()
             adapter.items = items
             adapter.notifyDataSetChanged()
