@@ -11,7 +11,7 @@ import androidx.core.app.RemoteInput
 object NotificationFactory {
     fun getNotification(context: Context): Notification {
         val addTransaction = Intent(context, NotificationBroadcastReciever::class.java).apply {
-            action = "add_transation"
+            action = "add_transation" //test
             putExtra(Notification.EXTRA_NOTIFICATION_ID, 0)
         }
         val pending = PendingIntent.getBroadcast(context, 123, addTransaction, 0)
