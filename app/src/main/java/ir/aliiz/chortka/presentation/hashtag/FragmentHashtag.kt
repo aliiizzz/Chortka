@@ -1,12 +1,18 @@
-package ir.aliiz.chortka
+package ir.aliiz.chortka.presentation.hashtag
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import ir.aliiz.chortka.R
 import ir.aliiz.chortka.domain.model.HashtagDomain
+import ir.aliiz.chortka.presentation.App
+import ir.aliiz.chortka.presentation.HashtagAdapter
+import ir.aliiz.chortka.presentation.ViewModelFactory
 import ir.aliiz.chortka.repository.TransactionRepo
 import kotlinx.android.synthetic.main.fragment_hashtag.*
 import kotlinx.coroutines.CoroutineScope
@@ -17,13 +23,16 @@ import javax.inject.Inject
 
 class FragmentHashtag : Fragment() {
 
+    @Inject lateinit var factory: ViewModelFactory
+    private val viewModelHashtag by viewModels<ViewModelHashtag> { factory }
+
     @Inject lateinit var transactionRepo: TransactionRepo
     lateinit var adapter: HashtagAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = HashtagAdapter { title, type ->
-            updateHashtag(title, type)
+            viewModelHashtag.updateHashtag(title, type)
         }
         (activity!!.applicationContext as App).component.apply {
             inject(this@FragmentHashtag)
@@ -39,31 +48,22 @@ class FragmentHashtag : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recycler_view_hashtag.layoutManager = LinearLayoutManager(context)
         recycler_view_hashtag.adapter = adapter
+        viewModelHashtag.loadItems.observe(this, Observer {
+            it.get()?.also {
+                adapter.items = it
+                adapter.notifyDataSetChanged()
+            }
+        })
+
+        button_hashtag_add.setOnClickListener {
+//            viewModelHashtag.validateFormula(
+//                edit_text_hashtag_add.text.toString()
+//            )
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        CoroutineScope(Dispatchers.Main).launch {
-            var hashtags = listOf<HashtagDomain>()
-            withContext(Dispatchers.IO) {
-                hashtags = transactionRepo.getHashtags()
-            }
-            adapter.items = hashtags
-            adapter.notifyDataSetChanged()
-        }
-    }
-
-    private fun updateHashtag(title: String, type: Int) {
-        CoroutineScope(Dispatchers.Main).launch {
-            val item = adapter.items.first { it.title == title }.copy(type = type)
-            withContext(Dispatchers.IO) {
-                transactionRepo.updateHashtag(item)
-            }
-            val items = adapter.items.toMutableList().apply {
-                this[this.indexOfFirst { it.title == title }] = item
-            }.toList()
-            adapter.items = items
-            adapter.notifyDataSetChanged()
-        }
+        viewModelHashtag.onResume()
     }
 }

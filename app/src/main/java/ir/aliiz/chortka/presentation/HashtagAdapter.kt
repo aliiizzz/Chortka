@@ -1,12 +1,12 @@
-package ir.aliiz.chortka
+package ir.aliiz.chortka.presentation
 
-import android.content.Context
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import ir.aliiz.chortka.R
 import ir.aliiz.chortka.domain.model.HashtagDomain
 import kotlinx.android.synthetic.main.hashtag_item.view.*
 
@@ -14,7 +14,13 @@ class HashtagAdapter(val clickListener: (title: String, type: Int) -> Unit): Rec
     var items: List<HashtagDomain> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HashtagViewHolder =
-        HashtagViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.hashtag_item, parent, false)).apply {
+        HashtagViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.hashtag_item,
+                parent,
+                false
+            )
+        ).apply {
             itemView.image_button_minus.setOnClickListener {
                 val item = items[this.adapterPosition]
                 clickListener.invoke(item.title, 2)

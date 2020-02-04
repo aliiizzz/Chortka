@@ -1,4 +1,4 @@
-package ir.aliiz.chortka
+package ir.aliiz.chortka.presentation
 
 import android.app.*
 import android.content.Context

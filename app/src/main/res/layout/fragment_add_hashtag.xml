@@ -3,34 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/recycler_view_hashtag"
+        android:id="@+id/recycler_view_add_hashtag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
+        app:layout_constraintBottom_toTopOf="@id/edit_text_add_hashtag_name"
+        />
     <EditText
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_text_hashtag_add"
+        android:id="@+id/edit_text_add_hashtag_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_hashtag_add"
-        android:hint="@string/add_hashtag_hint"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view_custom_hashtag"
         />
-    <Button
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button_hashtag_add"
-        android:text="@string/add"
+        android:id="@+id/recycler_view_custom_hashtag"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="16dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

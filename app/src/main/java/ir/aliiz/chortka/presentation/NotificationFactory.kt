@@ -1,4 +1,4 @@
-package ir.aliiz.chortka
+package ir.aliiz.chortka.presentation
 
 import android.app.Notification
 import android.app.PendingIntent
@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.RemoteInput
+import ir.aliiz.chortka.R
 
 object NotificationFactory {
     fun getNotification(context: Context): Notification {

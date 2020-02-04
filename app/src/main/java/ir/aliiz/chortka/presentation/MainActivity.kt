@@ -1,12 +1,11 @@
-package ir.aliiz.chortka
+package ir.aliiz.chortka.presentation
 
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import ir.aliiz.chortka.domain.model.HashtagDomain
-import ir.aliiz.chortka.repository.TransactionRepo
+import ir.aliiz.chortka.R
+import ir.aliiz.chortka.presentation.hashtag.FragmentHashtag
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,9 +23,15 @@ class MainActivity : AppCompatActivity() {
 
         bottom_navigation_main.setOnNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.action_hashtag -> supportFragmentManager.beginTransaction().replace(R.id.fragment_main, FragmentHashtag(), "hashtag").commit().let { true }
-                R.id.action_transaction -> supportFragmentManager.beginTransaction().replace(R.id.fragment_main, FragmentTransactions(), "transactions").commit().let { true }
-                else -> supportFragmentManager.beginTransaction().replace(R.id.fragment_main, FragmentHashtag(), "hashtag").commit().let { true }
+                R.id.action_hashtag -> supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_main,
+                    FragmentHashtag(), "hashtag").commit().let { true }
+                R.id.action_transaction -> supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_main,
+                    FragmentTransactions(), "transactions").commit().let { true }
+                else -> supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_main,
+                    FragmentHashtag(), "hashtag").commit().let { true }
             }
         }
 

@@ -2,14 +2,12 @@ package ir.aliiz.chortka.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import dagger.Component
 import dagger.Module
 import dagger.Provides
-import ir.aliiz.chortka.FragmentHashtag
-import ir.aliiz.chortka.FragmentTransactions
-import ir.aliiz.chortka.MainActivity
-import ir.aliiz.chortka.ReplyBroadcastReceiver
+import ir.aliiz.chortka.presentation.hashtag.FragmentHashtag
+import ir.aliiz.chortka.presentation.FragmentTransactions
+import ir.aliiz.chortka.presentation.ReplyBroadcastReceiver
 import ir.aliiz.chortka.local.ChortkaDatabase
 import ir.aliiz.chortka.local.TransactionDao
 import ir.aliiz.chortka.repository.TransactionRepo

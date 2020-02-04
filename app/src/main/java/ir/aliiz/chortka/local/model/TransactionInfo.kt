@@ -6,11 +6,12 @@ import androidx.room.PrimaryKey
 @Entity
 data class TransactionInfo(
     @PrimaryKey val id: String,
-    val amount: Long
+    val amount: Long,
+    val createdAt: Long
 )
 
 @Entity
-data class Hashtag(@PrimaryKey val title: String, val type: Int)
+data class Hashtag(@PrimaryKey val title: String, val type: Int, val formula: String?)
 
 
 @Entity

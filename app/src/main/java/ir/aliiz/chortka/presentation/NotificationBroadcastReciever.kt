@@ -1,4 +1,4 @@
-package ir.aliiz.chortka
+package ir.aliiz.chortka.presentation
 
 import android.content.BroadcastReceiver
 import android.content.Context

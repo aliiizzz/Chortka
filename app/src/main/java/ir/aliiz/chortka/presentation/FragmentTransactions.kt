@@ -1,4 +1,4 @@
-package ir.aliiz.chortka
+package ir.aliiz.chortka.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import ir.aliiz.chortka.domain.model.HashtagDomain
+import ir.aliiz.chortka.R
 import ir.aliiz.chortka.domain.model.TransactionInfoDomain
 import ir.aliiz.chortka.repository.TransactionRepo
 import kotlinx.android.synthetic.main.fragment_transactions.*
