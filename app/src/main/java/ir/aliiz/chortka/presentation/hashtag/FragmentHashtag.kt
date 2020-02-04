@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ir.aliiz.chortka.R
 import ir.aliiz.chortka.domain.model.HashtagDomain
@@ -56,9 +57,7 @@ class FragmentHashtag : Fragment() {
         })
 
         button_hashtag_add.setOnClickListener {
-//            viewModelHashtag.validateFormula(
-//                edit_text_hashtag_add.text.toString()
-//            )
+            viewModelHashtag.addClicked()
         }
     }
 

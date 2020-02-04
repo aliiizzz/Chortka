@@ -48,6 +48,9 @@ class ViewModelHashtag @Inject constructor(private val transactionRepo: Transact
         }
     }
 
+    fun addClicked() {
+
+    }
 
 
 }

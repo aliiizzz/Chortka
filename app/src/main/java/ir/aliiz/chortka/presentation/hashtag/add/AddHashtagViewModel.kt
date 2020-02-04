@@ -35,5 +35,9 @@ class AddHashtagViewModel @Inject constructor(
         }
     }
 
+    fun addHashtag(title: String) {
+
+    }
+
 
 }
