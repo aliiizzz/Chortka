@@ -21,21 +21,6 @@ class MainActivity : AppCompatActivity() {
             startService(Intent(this, TransactionService::class.java))
         }
 
-        bottom_navigation_main.setOnNavigationItemSelectedListener {
-            when(it.itemId) {
-                R.id.action_hashtag -> supportFragmentManager.beginTransaction().replace(
-                    R.id.fragment_main,
-                    FragmentHashtag(), "hashtag").commit().let { true }
-                R.id.action_transaction -> supportFragmentManager.beginTransaction().replace(
-                    R.id.fragment_main,
-                    FragmentTransactions(), "transactions").commit().let { true }
-                else -> supportFragmentManager.beginTransaction().replace(
-                    R.id.fragment_main,
-                    FragmentHashtag(), "hashtag").commit().let { true }
-            }
-        }
-
-
     }
 
 }

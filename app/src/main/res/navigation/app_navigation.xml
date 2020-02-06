@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/app_navigation"
+    app:startDestination="@id/fragment_main">
+
+    <fragment
+        android:id="@+id/fragment_main"
+        android:name="ir.aliiz.chortka.presentation.main.FragmentMain">
+        <action
+            android:id="@+id/action_main_to_add_hashtag"
+            app:destination="@id/fragment_add_hashtag"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_add_hashtag"
+        android:name="ir.aliiz.chortka.presentation.hashtag.add.AddHashtagFragment"/>
+</navigation>

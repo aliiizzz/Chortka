@@ -7,24 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity">
 
-    <FrameLayout
+    <fragment
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:id="@+id/fragment_main"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_main"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottom_navigation_main"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/main_menu"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/app_navigation"
         />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 

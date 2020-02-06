@@ -3,9 +3,11 @@ package ir.aliiz.chortka.presentation.hashtag
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavDirections
 import ir.aliiz.chortka.domain.model.HashtagDomain
 import ir.aliiz.chortka.presentation.Switch
 import ir.aliiz.chortka.presentation.ViewModelBase
+import ir.aliiz.chortka.presentation.main.FragmentMainDirections
 import ir.aliiz.chortka.repository.TransactionRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +20,9 @@ class ViewModelHashtag @Inject constructor(private val transactionRepo: Transact
     private val items: MediatorLiveData<List<HashtagDomain>> = MediatorLiveData()
     private val _loadItems: MutableLiveData<Switch<List<HashtagDomain>>> = MutableLiveData()
     val loadItems: LiveData<Switch<List<HashtagDomain>>> = _loadItems
+
+    private val _innerNav : MutableLiveData<Switch<NavDirections>> = MutableLiveData()
+    val innerNav : LiveData<Switch<NavDirections>> = _innerNav
 
     fun onResume() {
         CoroutineScope(Dispatchers.Main).launch {
@@ -49,7 +54,7 @@ class ViewModelHashtag @Inject constructor(private val transactionRepo: Transact
     }
 
     fun addClicked() {
-
+        _innerNav.value = Switch.nullSwitch(FragmentMainDirections.actionMainToAddHashtag())
     }
 
 

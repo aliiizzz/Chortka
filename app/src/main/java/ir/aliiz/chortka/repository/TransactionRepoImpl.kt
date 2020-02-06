@@ -12,9 +12,9 @@ import javax.inject.Inject
 class TransactionRepoImpl @Inject constructor(private val transactionDao: TransactionDao): TransactionRepo {
     override suspend fun addTransaction(param: TransactionInfoDomain) {
         val id = UUID.randomUUID().toString()
-        transactionDao.addTransaction(TransactionInfo(id, param.amount))
+        transactionDao.addTransaction(TransactionInfo(id, param.amount, System.currentTimeMillis()))
         param.hashtags.forEach {
-            transactionDao.addHashtag(Hashtag(it, 0))
+            transactionDao.addHashtag(Hashtag(it, 0, null))
             transactionDao.addTransactionHashtag(TransactionHashtag(0, it, id))
         }
     }
@@ -25,10 +25,10 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: Transa
     }
 
     override suspend fun getHashtags(): List<HashtagDomain> = transactionDao.getHashtags().map {
-        HashtagDomain(it.title, it.type)
+        HashtagDomain(it.title, it.type, null)
     }
 
     override suspend fun updateHashtag(id: HashtagDomain) {
-        transactionDao.updateHashtag(id.let { Hashtag(it.title, it.type) })
+        transactionDao.updateHashtag(id.let { Hashtag(it.title, it.type, null) })
     }
 }

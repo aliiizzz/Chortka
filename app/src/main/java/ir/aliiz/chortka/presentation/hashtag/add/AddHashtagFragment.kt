@@ -8,6 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import ir.aliiz.chortka.R
+import ir.aliiz.chortka.presentation.App
+import ir.aliiz.chortka.presentation.ViewModelBase
 import ir.aliiz.chortka.presentation.ViewModelFactory
 import ir.aliiz.chortka.presentation.hashtag.FragmentBase
 import kotlinx.android.synthetic.main.fragment_add_hashtag.*
@@ -19,8 +21,13 @@ class AddHashtagFragment : FragmentBase() {
     @Inject lateinit var factory: ViewModelFactory
     private val viewmodel: AddHashtagViewModel by viewModels { factory }
 
+    override fun getViewModel(): ViewModelBase = viewmodel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (context!!.applicationContext as App).component.apply {
+            inject(this@AddHashtagFragment)
+        }
         adapter = CustomHashtagAdapter {
             viewmodel.addHashtag(it)
         }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ir.aliiz.chortka.R
@@ -14,6 +15,7 @@ import ir.aliiz.chortka.domain.model.HashtagDomain
 import ir.aliiz.chortka.presentation.App
 import ir.aliiz.chortka.presentation.HashtagAdapter
 import ir.aliiz.chortka.presentation.ViewModelFactory
+import ir.aliiz.chortka.presentation.main.MainInnerNavigation
 import ir.aliiz.chortka.repository.TransactionRepo
 import kotlinx.android.synthetic.main.fragment_hashtag.*
 import kotlinx.coroutines.CoroutineScope
@@ -27,7 +29,6 @@ class FragmentHashtag : Fragment() {
     @Inject lateinit var factory: ViewModelFactory
     private val viewModelHashtag by viewModels<ViewModelHashtag> { factory }
 
-    @Inject lateinit var transactionRepo: TransactionRepo
     lateinit var adapter: HashtagAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +60,12 @@ class FragmentHashtag : Fragment() {
         button_hashtag_add.setOnClickListener {
             viewModelHashtag.addClicked()
         }
+
+        viewModelHashtag.innerNav.observe(this, Observer {
+            it.get()?.also {
+                ((parentFragment as NavHostFragment).navController).navigate(it)
+            }
+        })
     }
 
     override fun onResume() {
