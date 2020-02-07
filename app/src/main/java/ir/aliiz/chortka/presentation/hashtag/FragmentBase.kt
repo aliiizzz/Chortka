@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import ir.aliiz.chortka.navigation.model.Back
+import ir.aliiz.chortka.navigation.model.To
 import ir.aliiz.chortka.presentation.ViewModelBase
 
 abstract class FragmentBase : Fragment() {
@@ -14,7 +16,10 @@ abstract class FragmentBase : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getViewModel().navigation.observe(this, Observer {
             it.get()?.also {
-                findNavController().navigate(it)
+                when (it) {
+                    is To -> findNavController().navigate(it.direction, it.options)
+                    is Back -> findNavController().popBackStack()
+                }
             }
         })
     }

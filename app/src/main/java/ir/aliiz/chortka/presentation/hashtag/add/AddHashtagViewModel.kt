@@ -8,6 +8,7 @@ import ir.aliiz.chortka.domain.model.HashtagDomain
 import ir.aliiz.chortka.domain.model.Resource
 import ir.aliiz.chortka.domain.usecase.UseCaseAddHashtag
 import ir.aliiz.chortka.domain.usecase.UseCaseHashtags
+import ir.aliiz.chortka.navigation.model.Back
 import ir.aliiz.chortka.presentation.AppDispatchers
 import ir.aliiz.chortka.presentation.Switch
 import ir.aliiz.chortka.presentation.ViewModelBase
@@ -51,7 +52,7 @@ class AddHashtagViewModel @Inject constructor(
     }
 
     fun addClicked(hashtag: String) {
-        if (hashtag.contains("#").not() || hashtag.contains(" ")) {
+        if (hashtag.contains("#") || hashtag.contains(" ")) {
             return
         }
 
@@ -60,6 +61,7 @@ class AddHashtagViewModel @Inject constructor(
                 val value = (_hashtag.value ?: listOf()).joinToString(",")
                 addHashtagResult = useCaseAddHashtag.executeSuspend(HashtagDomain(hashtag, 0, value))
             }
+            navigate(Back())
         }
     }
 
