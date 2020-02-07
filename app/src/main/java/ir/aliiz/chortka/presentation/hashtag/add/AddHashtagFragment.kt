@@ -61,5 +61,8 @@ class AddHashtagFragment : FragmentBase() {
             }
             hashstagAdapter.notifyDataSetChanged()
         })
+        button_custom_hashtag_add.setOnClickListener {
+            viewmodel.addClicked()
+        }
     }
 }

@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import ir.aliiz.chortka.domain.model.HashtagDomain
 import ir.aliiz.chortka.domain.model.Resource
+import ir.aliiz.chortka.domain.usecase.UseCaseAddHashtag
 import ir.aliiz.chortka.domain.usecase.UseCaseHashtags
 import ir.aliiz.chortka.presentation.AppDispatchers
+import ir.aliiz.chortka.presentation.Switch
 import ir.aliiz.chortka.presentation.ViewModelBase
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,9 +17,11 @@ import javax.inject.Inject
 
 class AddHashtagViewModel @Inject constructor(
     private val useCaseHashtags: UseCaseHashtags,
-    private val appDispatchers: AppDispatchers
+    private val appDispatchers: AppDispatchers,
+    private val useCaseAddHashtag: UseCaseAddHashtag
 ): ViewModelBase() {
 
+    private var addHashtagResult: LiveData<Resource<Unit>> = MutableLiveData()
     private var hashtags: LiveData<Resource<List<HashtagDomain>>> = MutableLiveData()
     private val _hashtag: MutableLiveData<List<String>> = MutableLiveData()
     val hashtag: LiveData<List<String>> = _hashtag
@@ -44,6 +48,19 @@ class AddHashtagViewModel @Inject constructor(
             value.add(title)
         }
         _hashtag.value = value.toList()
+    }
+
+    fun addClicked(hashtag: String) {
+        if (hashtag.contains("#").not() || hashtag.contains(" ")) {
+            return
+        }
+
+        viewModelScope.launch {
+            withContext(appDispatchers.io) {
+                val value = (_hashtag.value ?: listOf()).joinToString(",")
+                addHashtagResult = useCaseAddHashtag.executeSuspend(HashtagDomain(hashtag, 0, value))
+            }
+        }
     }
 
 
