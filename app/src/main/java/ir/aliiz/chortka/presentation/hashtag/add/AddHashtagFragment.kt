@@ -17,6 +17,7 @@ import javax.inject.Inject
 
 class AddHashtagFragment : FragmentBase() {
 
+    private lateinit var hashstagAdapter: CreateHashtagAdapter
     private lateinit var adapter: CustomHashtagAdapter
     @Inject lateinit var factory: ViewModelFactory
     private val viewmodel: AddHashtagViewModel by viewModels { factory }
@@ -31,6 +32,7 @@ class AddHashtagFragment : FragmentBase() {
         adapter = CustomHashtagAdapter {
             viewmodel.addHashtag(it)
         }
+        hashstagAdapter = CreateHashtagAdapter()
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,9 +48,18 @@ class AddHashtagFragment : FragmentBase() {
         super.onViewCreated(view, savedInstanceState)
         recycler_view_add_hashtag.adapter = adapter
         recycler_view_add_hashtag.layoutManager = LinearLayoutManager(context)
+        recycler_view_custom_hashtag.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recycler_view_custom_hashtag.adapter = hashstagAdapter
         viewmodel.result.observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
+        })
+        viewmodel.hashtag.observe(this, Observer {
+            hashstagAdapter.items.apply {
+                clear()
+                addAll(it)
+            }
+            hashstagAdapter.notifyDataSetChanged()
         })
     }
 }

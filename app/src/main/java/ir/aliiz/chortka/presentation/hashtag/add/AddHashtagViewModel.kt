@@ -19,7 +19,8 @@ class AddHashtagViewModel @Inject constructor(
 ): ViewModelBase() {
 
     private var hashtags: LiveData<Resource<List<HashtagDomain>>> = MutableLiveData()
-    private val hashtag: MutableLiveData<HashtagDomain> = MutableLiveData()
+    private val _hashtag: MutableLiveData<List<String>> = MutableLiveData()
+    val hashtag: LiveData<List<String>> = _hashtag
     private val _result: MediatorLiveData<List<HashtagDomain>> = MediatorLiveData()
     val result: LiveData<List<HashtagDomain>> = _result
 
@@ -38,12 +39,11 @@ class AddHashtagViewModel @Inject constructor(
     }
 
     fun addHashtag(title: String) {
-        val value = hashtag.value
-        hashtag.value = value?.let {
-            val formula = it.formula
-            val newFormula = formula?.takeIf { it.split(",").isNotEmpty() }?.let { "$it,$title" } ?: title
-            it.copy(formula = newFormula)
-        } ?: HashtagDomain("", 0, title)
+        val value = (_hashtag.value ?: listOf()).toMutableList()
+        if (value.contains(title).not()) {
+            value.add(title)
+        }
+        _hashtag.value = value.toList()
     }
 
 
