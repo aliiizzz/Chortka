@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class FragmentTransactions : Fragment() {
+class TransactionsFragment : Fragment() {
 
     lateinit var adapter: TransactionsAdapter
     @Inject lateinit var transactionRepo: TransactionRepo
@@ -25,7 +25,7 @@ class FragmentTransactions : Fragment() {
         super.onCreate(savedInstanceState)
         adapter = TransactionsAdapter()
         (activity!!.applicationContext as App).component.apply {
-            inject(this@FragmentTransactions)
+            inject(this@TransactionsFragment)
         }
     }
 

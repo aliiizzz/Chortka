@@ -9,7 +9,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import ir.aliiz.chortka.R
 import ir.aliiz.chortka.presentation.App
-import ir.aliiz.chortka.presentation.FragmentTransactions
+import ir.aliiz.chortka.presentation.TransactionsFragment
 import ir.aliiz.chortka.presentation.ViewModelBase
 import ir.aliiz.chortka.presentation.ViewModelFactory
 import ir.aliiz.chortka.presentation.hashtag.FragmentBase
@@ -44,7 +44,7 @@ class FragmentMain: FragmentBase(), MainInnerNavigation {
                     FragmentHashtag(), "hashtag").commit().let { true }
                 R.id.action_transaction -> fragmentManager!!.beginTransaction().replace(
                     R.id.fragment_main,
-                    FragmentTransactions(), "transactions").commit().let { true }
+                    TransactionsFragment(), "transactions").commit().let { true }
                 else -> fragmentManager!!.beginTransaction().replace(
                     R.id.fragment_main,
                     FragmentHashtag(), "hashtag").commit().let { true }

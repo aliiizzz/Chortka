@@ -13,6 +13,8 @@ data class TransactionInfo(
 @Entity
 data class Hashtag(@PrimaryKey val title: String, val type: Int, val formula: String?)
 
-
 @Entity
 data class TransactionHashtag(@PrimaryKey(autoGenerate = true) val id: Long, val hashtagTitle: String, val transactionId: String)
+
+
+data class HashtagWithAmount(val title: String, val type: Int, val formula: String?, val amount: Long)

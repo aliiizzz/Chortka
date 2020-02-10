@@ -26,7 +26,7 @@ import kotlinx.coroutines.Dispatchers
 interface AppComponent {
     fun inject(context: ReplyBroadcastReceiver)
     fun inject(context: FragmentHashtag)
-    fun inject(context: FragmentTransactions)
+    fun inject(context: TransactionsFragment)
     fun inject(context: FragmentMain)
     fun inject(context: AddHashtagFragment)
 }
