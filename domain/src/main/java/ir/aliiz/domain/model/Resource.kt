@@ -1,4 +1,4 @@
-package ir.aliiz.chortka.domain.model
+package ir.aliiz.domain.model
 
 data class Resource<T>(val status: Status, val data: T?, val error: ErrorInfoDomain?) {
     enum class Status {

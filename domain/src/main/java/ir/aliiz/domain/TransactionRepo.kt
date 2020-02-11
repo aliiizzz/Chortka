@@ -1,11 +1,10 @@
-package ir.aliiz.chortka.repository
+package ir.aliiz.domain
 
 import androidx.lifecycle.LiveData
-import ir.aliiz.chortka.domain.model.HashtagDomain
-import ir.aliiz.chortka.domain.model.HashtagWithAmountDomain
-import ir.aliiz.chortka.domain.model.Resource
-import ir.aliiz.chortka.domain.model.TransactionInfoDomain
-import ir.aliiz.local.model.Hashtag
+import ir.aliiz.domain.model.HashtagDomain
+import ir.aliiz.domain.model.HashtagWithAmountDomain
+import ir.aliiz.domain.model.Resource
+import ir.aliiz.domain.model.TransactionInfoDomain
 
 interface TransactionRepo {
     suspend fun addTransaction(param: TransactionInfoDomain)

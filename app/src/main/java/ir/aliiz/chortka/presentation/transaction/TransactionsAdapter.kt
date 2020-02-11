@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ir.aliiz.chortka.R
-import ir.aliiz.chortka.domain.model.TransactionInfoDomain
+import ir.aliiz.domain.model.TransactionInfoDomain
 import kotlinx.android.synthetic.main.transaction_item.view.*
 
 class TransactionsAdapter(private val clickListener: (String) -> Unit) : RecyclerView.Adapter<TransactionViewHolder>() {

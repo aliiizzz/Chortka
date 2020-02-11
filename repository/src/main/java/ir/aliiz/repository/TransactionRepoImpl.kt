@@ -1,16 +1,13 @@
-package ir.aliiz.chortka.repository
+package ir.aliiz.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ir.aliiz.chortka.domain.model.*
-import ir.aliiz.local.TransactionDao
-import ir.aliiz.local.model.Hashtag
-import ir.aliiz.local.model.TransactionHashtag
-import ir.aliiz.local.model.TransactionInfo
+import ir.aliiz.domain.model.*
 import java.util.*
 import javax.inject.Inject
 
-class TransactionRepoImpl @Inject constructor(private val transactionDao: ir.aliiz.local.TransactionDao): TransactionRepo {
+class TransactionRepoImpl @Inject constructor(private val transactionDao: ir.aliiz.local.TransactionDao):
+    ir.aliiz.domain.TransactionRepo {
     override suspend fun addTransaction(param: TransactionInfoDomain) {
         val id = UUID.randomUUID().toString()
         transactionDao.addTransaction(

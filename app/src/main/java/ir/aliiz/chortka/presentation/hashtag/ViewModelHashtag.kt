@@ -4,17 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
-import ir.aliiz.chortka.domain.model.HashtagDomain
+import ir.aliiz.domain.model.HashtagDomain
 import ir.aliiz.chortka.presentation.Switch
 import ir.aliiz.chortka.presentation.ViewModelBase
-import ir.aliiz.chortka.repository.TransactionRepo
+import ir.aliiz.repository.TransactionRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class ViewModelHashtag @Inject constructor(private val transactionRepo: TransactionRepo): ViewModelBase() {
+class ViewModelHashtag @Inject constructor(private val transactionRepo: ir.aliiz.repository.TransactionRepo): ViewModelBase() {
 
     private val items: MediatorLiveData<List<HashtagDomain>> = MediatorLiveData()
     private val _loadItems: MutableLiveData<Switch<List<HashtagDomain>>> = MutableLiveData()

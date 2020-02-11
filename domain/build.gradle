@@ -1,0 +1,11 @@
+apply plugin: 'com.android.library'
+apply from: "../common.gradle"
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Deps.kotlin
+
+    implementation Deps.dagger
+    kapt Deps.daggerCompiler
+
+    implementation Deps.livedata
+}

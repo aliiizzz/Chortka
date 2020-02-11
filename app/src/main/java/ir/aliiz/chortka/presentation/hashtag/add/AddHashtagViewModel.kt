@@ -4,13 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import ir.aliiz.chortka.domain.model.HashtagDomain
-import ir.aliiz.chortka.domain.model.Resource
-import ir.aliiz.chortka.domain.usecase.UseCaseAddHashtag
-import ir.aliiz.chortka.domain.usecase.UseCaseHashtags
+import ir.aliiz.domain.model.HashtagDomain
+import ir.aliiz.domain.model.Resource
+import ir.aliiz.domain.usecase.UseCaseAddHashtag
+import ir.aliiz.domain.usecase.UseCaseHashtags
 import ir.aliiz.chortka.navigation.model.Back
 import ir.aliiz.chortka.presentation.AppDispatchers
-import ir.aliiz.chortka.presentation.Switch
 import ir.aliiz.chortka.presentation.ViewModelBase
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

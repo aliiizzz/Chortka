@@ -13,6 +13,9 @@ object Deps {
     val junitExt = "androidx.test.ext:junit:${Versions.junitExt}"
     val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
+    val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.livedata}"
+    val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.livedata}"
+
     private object Versions {
         val kotlin = "1.3.50"
         val appCompat = "1.1.0"
@@ -21,10 +24,13 @@ object Deps {
         val junit = "4.12"
         val junitExt = "1.1.1"
         val espresso = "3.2.0"
+        val livedata = "2.2.0"
     }
 }
 
 object Modules {
     val di = ":di"
     val local = ":local"
+    val repository = ":repository"
+    val domain = ":domain"
 }

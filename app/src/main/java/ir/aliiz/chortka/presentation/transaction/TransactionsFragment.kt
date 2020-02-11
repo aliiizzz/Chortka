@@ -9,15 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import ir.aliiz.chortka.R
-import ir.aliiz.chortka.domain.model.TransactionInfoDomain
+import ir.aliiz.domain.model.TransactionInfoDomain
 import ir.aliiz.chortka.presentation.App
 import ir.aliiz.chortka.presentation.ViewModelFactory
-import ir.aliiz.chortka.repository.TransactionRepo
 import kotlinx.android.synthetic.main.fragment_transactions.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class TransactionsFragment : Fragment() {

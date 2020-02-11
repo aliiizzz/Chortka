@@ -5,8 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ir.aliiz.chortka.R
-import ir.aliiz.chortka.domain.model.HashtagDomain
-import kotlinx.android.synthetic.main.hashtag_item.view.*
+import ir.aliiz.domain.model.HashtagDomain
 import kotlinx.android.synthetic.main.item_custom_hashtag.view.*
 
 class CustomHashtagAdapter(val clickListener: (String) -> Unit) : RecyclerView.Adapter<CustomHashtagViewHolder>() {

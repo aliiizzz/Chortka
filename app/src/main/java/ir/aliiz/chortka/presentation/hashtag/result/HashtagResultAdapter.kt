@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ir.aliiz.chortka.R
-import ir.aliiz.chortka.domain.model.HashtagWithAmountDomain
+import ir.aliiz.domain.model.HashtagWithAmountDomain
 import ir.aliiz.chortka.presentation.hashtag.add.inflate
 import kotlinx.android.synthetic.main.item_hashtag_result.view.*
 

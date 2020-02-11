@@ -7,15 +7,15 @@ import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.RemoteInput
 import androidx.core.text.isDigitsOnly
-import ir.aliiz.chortka.domain.model.TransactionInfoDomain
-import ir.aliiz.chortka.repository.TransactionRepo
+import ir.aliiz.domain.model.TransactionInfoDomain
+import ir.aliiz.repository.TransactionRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ReplyBroadcastReceiver : BroadcastReceiver() {
-    @Inject lateinit var transactionRepo: TransactionRepo
+    @Inject lateinit var transactionRepo: ir.aliiz.repository.TransactionRepo
 
 
     override fun onReceive(p0: Context?, p1: Intent?) {

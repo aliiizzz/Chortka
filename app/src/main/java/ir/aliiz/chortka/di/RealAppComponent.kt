@@ -7,7 +7,7 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
-import ir.aliiz.chortka.domain.usecase.UseCaseHashtags
+import ir.aliiz.domain.usecase.UseCaseHashtags
 import ir.aliiz.chortka.presentation.hashtag.FragmentHashtag
 import ir.aliiz.local.ChortkaDatabase
 import ir.aliiz.local.TransactionDao
@@ -23,8 +23,8 @@ import ir.aliiz.chortka.presentation.main.MainFragment
 import ir.aliiz.chortka.presentation.main.ViewModelMain
 import ir.aliiz.chortka.presentation.transaction.TransactionViewModel
 import ir.aliiz.chortka.presentation.transaction.TransactionsFragment
-import ir.aliiz.chortka.repository.TransactionRepo
-import ir.aliiz.chortka.repository.TransactionRepoImpl
+import ir.aliiz.domain.TransactionRepo
+import ir.aliiz.repository.TransactionRepoImpl
 import kotlinx.coroutines.Dispatchers
 
 @Component(modules = [ViewModelBuilder::class, AppModule::class,
@@ -49,7 +49,8 @@ class AppModule(val context: Context) {
     fun provideTransactionDao(db: ChortkaDatabase) = db.transactionDao()
 
     @Provides
-    fun provideTransactionRepo(transactionDao: TransactionDao): TransactionRepo = TransactionRepoImpl(transactionDao)
+    fun provideTransactionRepo(transactionDao: TransactionDao): TransactionRepo =
+        TransactionRepoImpl(transactionDao)
 
     @Provides
     fun provideDispatcher(): AppDispatchers = AppDispatchers(Dispatchers.Main, Dispatchers.IO)

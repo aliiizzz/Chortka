@@ -8,20 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ir.aliiz.chortka.R
-import ir.aliiz.chortka.domain.model.HashtagDomain
+import ir.aliiz.domain.model.HashtagDomain
 import ir.aliiz.chortka.presentation.App
 import ir.aliiz.chortka.presentation.HashtagAdapter
 import ir.aliiz.chortka.presentation.ViewModelFactory
-import ir.aliiz.chortka.presentation.main.MainInnerNavigation
-import ir.aliiz.chortka.repository.TransactionRepo
 import kotlinx.android.synthetic.main.fragment_hashtag.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class FragmentHashtag : Fragment() {

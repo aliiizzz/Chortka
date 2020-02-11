@@ -4,17 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import ir.aliiz.chortka.domain.model.TransactionInfoDomain
+import ir.aliiz.domain.model.TransactionInfoDomain
 import ir.aliiz.chortka.presentation.AppDispatchers
 import ir.aliiz.chortka.presentation.ViewModelBase
-import ir.aliiz.chortka.repository.TransactionRepo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import ir.aliiz.repository.TransactionRepo
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class TransactionViewModel @Inject constructor(private val transactionRepo: TransactionRepo,
+class TransactionViewModel @Inject constructor(private val transactionRepo: ir.aliiz.repository.TransactionRepo,
                                                private val appDispatchers: AppDispatchers): ViewModelBase() {
 
     private var hashtags: LiveData<List<TransactionInfoDomain>> = MutableLiveData()

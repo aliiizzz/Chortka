@@ -1,4 +1,4 @@
-package ir.aliiz.chortka.domain.model
+package ir.aliiz.domain.model
 
 data class TransactionInfoDomain(
     val id: String,

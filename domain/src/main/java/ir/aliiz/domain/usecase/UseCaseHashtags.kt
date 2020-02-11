@@ -1,10 +1,10 @@
-package ir.aliiz.chortka.domain.usecase
+package ir.aliiz.domain.usecase
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ir.aliiz.chortka.domain.model.ErrorInfoDomain
-import ir.aliiz.chortka.domain.model.HashtagDomain
-import ir.aliiz.chortka.domain.model.Resource
+import ir.aliiz.domain.model.ErrorInfoDomain
+import ir.aliiz.domain.model.HashtagDomain
+import ir.aliiz.domain.model.Resource
 import ir.aliiz.chortka.repository.TransactionRepo
 import javax.inject.Inject
 
