@@ -30,7 +30,7 @@ import kotlinx.coroutines.Dispatchers
 @Component(modules = [ViewModelBuilder::class, AppModule::class,
     HashtagModule::class, MainModule::class, AddHashtagModule::class,
     UseCaseModule::class, TransactionModule::class])
-interface AppComponent {
+interface RealAppComponent {
     fun inject(context: ReplyBroadcastReceiver)
     fun inject(context: FragmentHashtag)
     fun inject(context: TransactionsFragment)

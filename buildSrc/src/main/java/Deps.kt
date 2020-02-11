@@ -10,3 +10,7 @@ object Deps {
         val dagger = "2.25.2"
     }
 }
+
+object Modules {
+    val di = ":di"
+}

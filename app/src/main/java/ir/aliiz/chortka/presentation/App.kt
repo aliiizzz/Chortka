@@ -1,16 +1,23 @@
 package ir.aliiz.chortka.presentation
 
 import android.app.Application
-import ir.aliiz.chortka.di.AppComponent
 import ir.aliiz.chortka.di.AppModule
-import ir.aliiz.chortka.di.DaggerAppComponent
+import ir.aliiz.chortka.di.DaggerRealAppComponent
+import ir.aliiz.chortka.di.RealAppComponent
+import ir.aliiz.di.AppComponent
+import ir.aliiz.di.DaggerAppComponent
+import ir.aliiz.di.Provider
 
-class App : Application() {
+class App : Application(), Provider {
 
-    lateinit var component: AppComponent
+    private lateinit var diComponent: AppComponent
+    lateinit var component: RealAppComponent
 
     override fun onCreate() {
         super.onCreate()
-        component = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+        component = DaggerRealAppComponent.builder().appModule(AppModule(this)).build()
+        diComponent = DaggerAppComponent.builder().build()
     }
+
+    override fun getComponent(): AppComponent = diComponent
 }
