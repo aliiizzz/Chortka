@@ -1,7 +1,7 @@
-package ir.aliiz.chortka.local
+package ir.aliiz.local
 
 import androidx.room.*
-import ir.aliiz.chortka.local.model.*
+import ir.aliiz.local.model.*
 
 @Dao
 interface TransactionDao {

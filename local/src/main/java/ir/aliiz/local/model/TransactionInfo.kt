@@ -1,4 +1,4 @@
-package ir.aliiz.chortka.local.model
+package ir.aliiz.local.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -9,8 +9,8 @@ import dagger.Provides
 import dagger.multibindings.IntoMap
 import ir.aliiz.chortka.domain.usecase.UseCaseHashtags
 import ir.aliiz.chortka.presentation.hashtag.FragmentHashtag
-import ir.aliiz.chortka.local.ChortkaDatabase
-import ir.aliiz.chortka.local.TransactionDao
+import ir.aliiz.local.ChortkaDatabase
+import ir.aliiz.local.TransactionDao
 import ir.aliiz.chortka.presentation.*
 import ir.aliiz.chortka.presentation.hashtag.ViewModelHashtag
 import ir.aliiz.chortka.presentation.hashtag.add.AddHashtagFragment

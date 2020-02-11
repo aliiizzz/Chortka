@@ -1,2 +1,2 @@
-include ':app', ':di'
+include ':app', ':di', ':local'
 rootProject.name='Chortka'

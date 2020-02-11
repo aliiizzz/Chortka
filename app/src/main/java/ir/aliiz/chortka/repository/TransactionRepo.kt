@@ -5,7 +5,7 @@ import ir.aliiz.chortka.domain.model.HashtagDomain
 import ir.aliiz.chortka.domain.model.HashtagWithAmountDomain
 import ir.aliiz.chortka.domain.model.Resource
 import ir.aliiz.chortka.domain.model.TransactionInfoDomain
-import ir.aliiz.chortka.local.model.Hashtag
+import ir.aliiz.local.model.Hashtag
 
 interface TransactionRepo {
     suspend fun addTransaction(param: TransactionInfoDomain)
