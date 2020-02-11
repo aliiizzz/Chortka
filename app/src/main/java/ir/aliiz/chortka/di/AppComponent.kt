@@ -17,12 +17,15 @@ import ir.aliiz.chortka.presentation.hashtag.add.AddHashtagFragment
 import ir.aliiz.chortka.presentation.hashtag.add.AddHashtagViewModel
 import ir.aliiz.chortka.presentation.main.FragmentMain
 import ir.aliiz.chortka.presentation.main.ViewModelMain
+import ir.aliiz.chortka.presentation.transaction.TransactionViewModel
+import ir.aliiz.chortka.presentation.transaction.TransactionsFragment
 import ir.aliiz.chortka.repository.TransactionRepo
 import ir.aliiz.chortka.repository.TransactionRepoImpl
 import kotlinx.coroutines.Dispatchers
 
 @Component(modules = [ViewModelBuilder::class, AppModule::class,
-    HashtagModule::class, MainModule::class, AddHashtagModule::class, UseCaseModule::class])
+    HashtagModule::class, MainModule::class, AddHashtagModule::class,
+    UseCaseModule::class, TransactionModule::class])
 interface AppComponent {
     fun inject(context: ReplyBroadcastReceiver)
     fun inject(context: FragmentHashtag)
@@ -75,4 +78,12 @@ class AddHashtagModule {
 class UseCaseModule {
     @Provides
     fun provideHashtag(transactionRepo: TransactionRepo): UseCaseHashtags = UseCaseHashtags(transactionRepo)
+}
+
+@Module
+class TransactionModule {
+    @Provides
+    @IntoMap
+    @ViewModelKey(TransactionViewModel::class)
+    fun provideViewModel(vm: TransactionViewModel): ViewModel = vm
 }

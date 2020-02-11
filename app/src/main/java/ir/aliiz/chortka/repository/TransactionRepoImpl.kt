@@ -23,11 +23,15 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: Transa
         }
     }
 
-    override suspend fun getTransactions(): List<TransactionInfoDomain> = transactionDao.getTransactions().map {
-        val hashtags = transactionDao.getTransactionHashtags(it.id)
-        TransactionInfoDomain(hashtags, it.amount)
+    override suspend fun getTransactions(): LiveData<List<TransactionInfoDomain>> {
+        val result = MutableLiveData<List<TransactionInfoDomain>>()
+        val res = transactionDao.getTransactions().map {
+            val hashtags = transactionDao.getTransactionHashtags(it.id)
+            TransactionInfoDomain(it.id, hashtags, it.amount)
+        }
+        result.postValue(res)
+        return result
     }
-
     override suspend fun getHashtags(): List<HashtagDomain> = transactionDao.getHashtags().map {
         HashtagDomain(it.title, it.type, null)
     }

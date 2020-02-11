@@ -33,7 +33,7 @@ class ReplyBroadcastReceiver : BroadcastReceiver() {
             }
 
             CoroutineScope(Dispatchers.IO).launch {
-                transactionRepo.addTransaction(TransactionInfoDomain(hashtags, amount))
+                transactionRepo.addTransaction(TransactionInfoDomain("", hashtags, amount))
             }
             NotificationManagerCompat.from(p0).apply {
                 val id = 101

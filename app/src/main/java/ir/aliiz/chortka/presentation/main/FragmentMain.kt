@@ -9,7 +9,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import ir.aliiz.chortka.R
 import ir.aliiz.chortka.presentation.App
-import ir.aliiz.chortka.presentation.TransactionsFragment
+import ir.aliiz.chortka.presentation.transaction.TransactionsFragment
 import ir.aliiz.chortka.presentation.ViewModelBase
 import ir.aliiz.chortka.presentation.ViewModelFactory
 import ir.aliiz.chortka.presentation.hashtag.FragmentBase
@@ -40,16 +40,15 @@ class FragmentMain: FragmentBase(), MainInnerNavigation {
         bottom_navigation_main.setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.action_hashtag -> fragmentManager!!.beginTransaction().replace(
-                    R.id.fragment_main,
+                    R.id.inner_holder,
                     FragmentHashtag(), "hashtag").commit().let { true }
                 R.id.action_transaction -> fragmentManager!!.beginTransaction().replace(
-                    R.id.fragment_main,
+                    R.id.inner_holder,
                     TransactionsFragment(), "transactions").commit().let { true }
-                else -> fragmentManager!!.beginTransaction().replace(
-                    R.id.fragment_main,
-                    FragmentHashtag(), "hashtag").commit().let { true }
+                else -> false
             }
         }
+        bottom_navigation_main.selectedItemId = R.id.action_transaction
 
     }
 

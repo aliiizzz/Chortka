@@ -1,4 +1,4 @@
-package ir.aliiz.chortka.presentation
+package ir.aliiz.chortka.presentation.transaction
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import ir.aliiz.chortka.R
 import ir.aliiz.chortka.domain.model.TransactionInfoDomain
 import kotlinx.android.synthetic.main.transaction_item.view.*
 
-class TransactionsAdapter : RecyclerView.Adapter<TransactionViewHolder>() {
+class TransactionsAdapter(private val clickListener: (String) -> Unit) : RecyclerView.Adapter<TransactionViewHolder>() {
     var items: MutableList<TransactionInfoDomain> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder =
@@ -18,13 +18,18 @@ class TransactionsAdapter : RecyclerView.Adapter<TransactionViewHolder>() {
                 parent,
                 false
             )
-        )
+        ).apply {
+            itemView.text_view_transaction_item_amount.setOnClickListener { clickListener(items[adapterPosition].id) }
+        }
 
     override fun getItemCount(): Int = items.count()
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
         val item = items[position]
-        holder.itemView.text_view_amount.setText("${item.amount} - ${item.hashtags.joinToString(" ")}")
+        with(holder.itemView) {
+            text_view_transaction_item_amount.text = "${item.amount}"
+            text_view_transaction_item_hashtags.text = item.hashtags.joinToString(" ")
+        }
     }
 }
 
