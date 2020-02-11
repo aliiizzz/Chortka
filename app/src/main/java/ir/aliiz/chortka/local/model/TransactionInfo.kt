@@ -18,3 +18,5 @@ data class TransactionHashtag(@PrimaryKey(autoGenerate = true) val id: Long, val
 
 
 data class HashtagWithAmount(val title: String, val type: Int, val formula: String?, val amount: Long)
+
+data class HashtagTransaction(val id: String, val amount: Long, val createdAt: Long, val hashtag: String)

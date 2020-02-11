@@ -15,7 +15,11 @@ import ir.aliiz.chortka.presentation.*
 import ir.aliiz.chortka.presentation.hashtag.ViewModelHashtag
 import ir.aliiz.chortka.presentation.hashtag.add.AddHashtagFragment
 import ir.aliiz.chortka.presentation.hashtag.add.AddHashtagViewModel
-import ir.aliiz.chortka.presentation.main.FragmentMain
+import ir.aliiz.chortka.presentation.hashtag.result.HashtagResultFragment
+import ir.aliiz.chortka.presentation.hashtag.result.HashtagResultViewModel
+import ir.aliiz.chortka.presentation.hashtag.result.detail.HashtagResultDetailFragment
+import ir.aliiz.chortka.presentation.hashtag.result.detail.HashtagResultDetailViewModel
+import ir.aliiz.chortka.presentation.main.MainFragment
 import ir.aliiz.chortka.presentation.main.ViewModelMain
 import ir.aliiz.chortka.presentation.transaction.TransactionViewModel
 import ir.aliiz.chortka.presentation.transaction.TransactionsFragment
@@ -30,8 +34,10 @@ interface AppComponent {
     fun inject(context: ReplyBroadcastReceiver)
     fun inject(context: FragmentHashtag)
     fun inject(context: TransactionsFragment)
-    fun inject(context: FragmentMain)
+    fun inject(context: MainFragment)
     fun inject(context: AddHashtagFragment)
+    fun inject(context: HashtagResultFragment)
+    fun inject(context: HashtagResultDetailFragment)
 }
 
 @Module
@@ -56,6 +62,16 @@ class HashtagModule {
     @IntoMap
     @ViewModelKey(ViewModelHashtag::class)
     fun provideHashtagViewmodel(vm: ViewModelHashtag): ViewModel = vm
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(HashtagResultViewModel::class)
+    fun provideHashtagResultViewmodel(vm: HashtagResultViewModel): ViewModel = vm
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(HashtagResultDetailViewModel::class)
+    fun provideHashtagResultDetailViewmodel(vm: HashtagResultDetailViewModel): ViewModel = vm
 }
 
 @Module

@@ -11,11 +11,11 @@ import ir.aliiz.chortka.R
 import ir.aliiz.chortka.presentation.App
 import ir.aliiz.chortka.presentation.ViewModelBase
 import ir.aliiz.chortka.presentation.ViewModelFactory
-import ir.aliiz.chortka.presentation.hashtag.FragmentBase
+import ir.aliiz.chortka.presentation.hashtag.BaseFragment
 import kotlinx.android.synthetic.main.fragment_add_hashtag.*
 import javax.inject.Inject
 
-class AddHashtagFragment : FragmentBase() {
+class AddHashtagFragment : BaseFragment() {
 
     private lateinit var hashstagAdapter: CreateHashtagAdapter
     private lateinit var adapter: CustomHashtagAdapter

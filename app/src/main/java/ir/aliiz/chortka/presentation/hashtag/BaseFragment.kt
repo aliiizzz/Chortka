@@ -9,7 +9,7 @@ import ir.aliiz.chortka.navigation.model.Back
 import ir.aliiz.chortka.navigation.model.To
 import ir.aliiz.chortka.presentation.ViewModelBase
 
-abstract class FragmentBase : Fragment() {
+abstract class BaseFragment : Fragment() {
     abstract fun getViewModel(): ViewModelBase
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

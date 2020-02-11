@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/action_transaction"
-        android:title="transactions"/>
+        android:title="Transactions"/>
     <item android:id="@+id/action_hashtag"
-        android:title="hashtags"/>
+        android:title="Hashtags"/>
+    <item
+        android:id="@+id/action_hashtag_amount"
+        android:title="Result"/>
 </menu>

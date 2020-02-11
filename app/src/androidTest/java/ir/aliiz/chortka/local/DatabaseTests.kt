@@ -2,6 +2,7 @@ package ir.aliiz.chortka.local
 
 import android.content.Context
 import androidx.room.Room
+import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.test.core.app.ApplicationProvider
 import ir.aliiz.chortka.local.model.Hashtag
 import ir.aliiz.chortka.local.model.TransactionHashtag
@@ -57,6 +58,18 @@ class DatabaseTests {
             val list = trDao.getHashtagsWithAmount()
             Assert.assertEquals(list.size, 1)
             Assert.assertEquals(list[0].amount, 4400)
+        }
+    }
+
+    @Test
+    fun hashtag_transactions() {
+        doTest {
+            trDao.addHashtag(Hashtag("test", 1, null))
+            trDao.addTransaction(TransactionInfo("1", 1000, System.currentTimeMillis()))
+            trDao.addTransaction(TransactionInfo("2", 3400, System.currentTimeMillis()))
+            trDao.addTransactionHashtag(TransactionHashtag(0, "test", "1"))
+            trDao.addTransactionHashtag(TransactionHashtag(0, "test", "2"))
+            val q = db.query(SimpleSQLiteQuery("select * from TransactionHashtag left join Hashtag on TransactionHashtag.hashtagTitle = Hashtag.title left join TransactionInfo on TransactionHashtag.transactionId = TransactionInfo.id"))
         }
     }
 

@@ -7,7 +7,6 @@ import androidx.navigation.NavDirections
 import ir.aliiz.chortka.domain.model.HashtagDomain
 import ir.aliiz.chortka.presentation.Switch
 import ir.aliiz.chortka.presentation.ViewModelBase
-import ir.aliiz.chortka.presentation.main.FragmentMainDirections
 import ir.aliiz.chortka.repository.TransactionRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +53,7 @@ class ViewModelHashtag @Inject constructor(private val transactionRepo: Transact
     }
 
     fun addClicked() {
-        _innerNav.value = Switch.nullSwitch(FragmentMainDirections.actionMainToAddHashtag())
+//        _innerNav.value = Switch.nullSwitch(Mainfram)
     }
 
 

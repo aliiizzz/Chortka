@@ -9,7 +9,7 @@ import ir.aliiz.chortka.domain.model.TransactionInfoDomain
 import kotlinx.android.synthetic.main.transaction_item.view.*
 
 class TransactionsAdapter(private val clickListener: (String) -> Unit) : RecyclerView.Adapter<TransactionViewHolder>() {
-    var items: MutableList<TransactionInfoDomain> = mutableListOf()
+    var items: List<TransactionInfoDomain> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder =
         TransactionViewHolder(

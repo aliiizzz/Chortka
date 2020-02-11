@@ -2,10 +2,7 @@ package ir.aliiz.chortka.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ir.aliiz.chortka.domain.model.ErrorInfoDomain
-import ir.aliiz.chortka.domain.model.HashtagDomain
-import ir.aliiz.chortka.domain.model.Resource
-import ir.aliiz.chortka.domain.model.TransactionInfoDomain
+import ir.aliiz.chortka.domain.model.*
 import ir.aliiz.chortka.local.TransactionDao
 import ir.aliiz.chortka.local.model.Hashtag
 import ir.aliiz.chortka.local.model.TransactionHashtag
@@ -46,6 +43,34 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: Transa
             transactionDao.addHashtag(param.let { Hashtag(it.title, it.type, it.formula) })
             result.postValue(Resource.success(Unit))
         } catch (e: Exception) {
+            result.postValue(Resource.error(ErrorInfoDomain(e)))
+        }
+        return result
+    }
+
+    override suspend fun getHashtagWithAmount(): LiveData<Resource<List<HashtagWithAmountDomain>>> {
+        val result = MutableLiveData<Resource<List<HashtagWithAmountDomain>>>()
+        try {
+            val res = transactionDao.getHashtagsWithAmount()
+            result.postValue(Resource.success<List<HashtagWithAmountDomain>>(res.map {
+                HashtagWithAmountDomain(it.title, it.type, it.formula, it.amount)
+            }))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            result.postValue(Resource.error(ErrorInfoDomain(e)))
+        }
+        return result
+    }
+
+    override suspend fun getHashtagTransactions(hashtag: String): LiveData<Resource<List<TransactionInfoDomain>>> {
+        val result = MutableLiveData<Resource<List<TransactionInfoDomain>>>()
+        try {
+            val res = transactionDao.getHashtagTransactions(hashtag)
+            result.postValue(Resource.success(res.map {
+                TransactionInfoDomain(it.id, listOf(), it.amount)
+            }))
+        } catch (e: Exception) {
+            e.printStackTrace()
             result.postValue(Resource.error(ErrorInfoDomain(e)))
         }
         return result

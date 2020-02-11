@@ -1,10 +1,7 @@
 package ir.aliiz.chortka.local
 
 import androidx.room.*
-import ir.aliiz.chortka.local.model.Hashtag
-import ir.aliiz.chortka.local.model.HashtagWithAmount
-import ir.aliiz.chortka.local.model.TransactionHashtag
-import ir.aliiz.chortka.local.model.TransactionInfo
+import ir.aliiz.chortka.local.model.*
 
 @Dao
 interface TransactionDao {
@@ -33,4 +30,7 @@ interface TransactionDao {
 
     @Query("select title from TransactionHashtag inner join Hashtag on TransactionHashtag.hashtagTitle = Hashtag.title where TransactionHashtag.transactionId = :id")
     fun getTransactionHashtags(id: String): List<String>
+
+    @Query("select TransactionInfo.id as id, TransactionInfo.amount as amount, TransactionInfo.createdAt as createdAt, Hashtag.title as hashtag from TransactionHashtag left join Hashtag on TransactionHashtag.hashtagTitle = Hashtag.title left join TransactionInfo on TransactionHashtag.transactionId = TransactionInfo.id where hashtag=:hashtag")
+    fun getHashtagTransactions(hashtag: String): List<HashtagTransaction>
 }

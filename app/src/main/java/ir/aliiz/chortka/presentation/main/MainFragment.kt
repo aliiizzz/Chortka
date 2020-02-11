@@ -12,12 +12,13 @@ import ir.aliiz.chortka.presentation.App
 import ir.aliiz.chortka.presentation.transaction.TransactionsFragment
 import ir.aliiz.chortka.presentation.ViewModelBase
 import ir.aliiz.chortka.presentation.ViewModelFactory
-import ir.aliiz.chortka.presentation.hashtag.FragmentBase
+import ir.aliiz.chortka.presentation.hashtag.BaseFragment
 import ir.aliiz.chortka.presentation.hashtag.FragmentHashtag
+import ir.aliiz.chortka.presentation.hashtag.result.HashtagResultFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
-class FragmentMain: FragmentBase(), MainInnerNavigation {
+class MainFragment: BaseFragment(), MainInnerNavigation {
     @Inject lateinit var factory: ViewModelFactory
     private val viewmodel: ViewModelBase by viewModels { factory }
 
@@ -26,7 +27,7 @@ class FragmentMain: FragmentBase(), MainInnerNavigation {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (context!!.applicationContext as App).component.apply {
-            inject(this@FragmentMain)
+            inject(this@MainFragment)
         }
     }
     override fun onCreateView(
@@ -45,6 +46,11 @@ class FragmentMain: FragmentBase(), MainInnerNavigation {
                 R.id.action_transaction -> fragmentManager!!.beginTransaction().replace(
                     R.id.inner_holder,
                     TransactionsFragment(), "transactions").commit().let { true }
+                R.id.action_hashtag_amount -> fragmentManager!!.beginTransaction().replace(
+                    R.id.inner_holder,
+                    HashtagResultFragment().apply {
+                        setTargetFragment(this@MainFragment, 123)
+                    }, "hashtagAmount").commit().let { true }
                 else -> false
             }
         }
