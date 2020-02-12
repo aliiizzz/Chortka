@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ir.aliiz.common.BaseFragment
 import ir.aliiz.common.ViewModelBase
 import ir.aliiz.common.ViewModelFactory
+import ir.aliiz.hashtag.di.HashtagComponent
 import kotlinx.android.synthetic.main.fragment_hashtag.*
 import javax.inject.Inject
 
@@ -28,9 +29,7 @@ class FragmentHashtag : BaseFragment() {
         adapter = HashtagAdapter { title, type ->
             viewModelHashtag.updateHashtag(title, type)
         }
-//        (activity!!.applicationContext as App).component.apply {
-//            inject(this@FragmentHashtag)
-//        }
+        HashtagComponent.create(activity!!).inject(this)
     }
     override fun onCreateView(
         inflater: LayoutInflater,

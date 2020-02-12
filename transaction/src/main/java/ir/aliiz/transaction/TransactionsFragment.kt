@@ -8,22 +8,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import ir.aliiz.common.ViewModelFactory
+import ir.aliiz.transaction.di.TransactionComponent
 import kotlinx.android.synthetic.main.fragment_transactions.*
 import javax.inject.Inject
 
 class TransactionsFragment : Fragment() {
 
     lateinit var adapter: TransactionsAdapter
-    @Inject lateinit var factory: ir.aliiz.common.ViewModelFactory
+    @Inject lateinit var factory: ViewModelFactory
     private val viewmodel: TransactionViewModel by viewModels { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = TransactionsAdapter {
         }
-//        (activity!!.applicationContext as App).component.apply {
-//            inject(this@TransactionsFragment)
-//        }
+        TransactionComponent.create(activity!!).inject(this)
     }
 
     override fun onCreateView(

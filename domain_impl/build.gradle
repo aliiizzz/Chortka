@@ -4,15 +4,13 @@ apply from: "../common.gradle"
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Deps.kotlin
-    testImplementation Deps.junit
-    androidTestImplementation Deps.junitExt
-    androidTestImplementation Deps.espresso
-
-    api Deps.roomRuntime
-    kapt Deps.roomCompiler
-    implementation Deps.roomKtx
 
     implementation Deps.dagger
     kapt Deps.daggerCompiler
+
+    implementation Deps.livedata
     implementation project(Modules.di)
+    implementation project(Modules.repository)
+    implementation project(Modules.local)
+    implementation project(Modules.domain)
 }

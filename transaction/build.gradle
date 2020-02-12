@@ -20,4 +20,6 @@ dependencies {
     implementation project(Modules.domain)
     implementation project(Modules.navigation)
     implementation project(Modules.di)
+    implementation project(Modules.repository)
+    implementation project(Modules.local)
 }

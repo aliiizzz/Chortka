@@ -45,4 +45,5 @@ object Modules {
     val common = ":common"
     val hashtag = ":hashtag"
     val transaction = ":transaction"
+    val domainImpl = ":domain_impl"
 }

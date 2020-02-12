@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import ir.aliiz.chortka.presentation.main.MainFragmentDirections
 import ir.aliiz.common.BaseFragment
 import ir.aliiz.common.MainInnerNavigation
 import ir.aliiz.common.ViewModelBase
 import ir.aliiz.common.ViewModelFactory
 import ir.aliiz.hashtag.R
+import ir.aliiz.hashtag.di.HashtagComponent
 import kotlinx.android.synthetic.main.fragment_hashtag_result.*
 import javax.inject.Inject
 
@@ -25,15 +27,9 @@ class HashtagResultFragment: BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = HashtagResultAdapter {
-//            (targetFragment as MainInnerNavigation).navigate(
-//                MainFragmentDirections.actionMainToHashtagResultDetail(
-//                    it
-//                )
-//            )
+            (targetFragment as MainInnerNavigation).navigate(MainFragmentDirections.actionMainToHashtagResultDetail(it))
         }
-//        (activity!!.applicationContext as App).component.apply {
-//            inject(this@HashtagResultFragment)
-//        }
+        HashtagComponent.create(activity!!).inject(this)
     }
 
     override fun onCreateView(
