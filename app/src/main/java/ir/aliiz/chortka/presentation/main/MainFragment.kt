@@ -4,25 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
 import ir.aliiz.chortka.R
 import ir.aliiz.chortka.presentation.App
-import ir.aliiz.chortka.presentation.transaction.TransactionsFragment
-import ir.aliiz.chortka.presentation.ViewModelBase
-import ir.aliiz.chortka.presentation.ViewModelFactory
+import ir.aliiz.transaction.TransactionsFragment
+import ir.aliiz.common.ViewModelBase
+import ir.aliiz.common.ViewModelFactory
 import ir.aliiz.chortka.presentation.hashtag.BaseFragment
-import ir.aliiz.chortka.presentation.hashtag.FragmentHashtag
-import ir.aliiz.chortka.presentation.hashtag.result.HashtagResultFragment
-import kotlinx.android.synthetic.main.fragment_main.*
+import ir.aliiz.hashtag.FragmentHashtag
+import ir.aliiz.hashtag.result.HashtagResultFragment
 import javax.inject.Inject
 
 class MainFragment: BaseFragment(), MainInnerNavigation {
-    @Inject lateinit var factory: ViewModelFactory
-    private val viewmodel: ViewModelBase by viewModels { factory }
+    @Inject lateinit var factory: ir.aliiz.common.ViewModelFactory
+    private val viewmodel: ir.aliiz.common.ViewModelBase by viewModels { factory }
 
-    override fun getViewModel(): ViewModelBase = viewmodel
+    override fun getViewModel(): ir.aliiz.common.ViewModelBase = viewmodel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +39,13 @@ class MainFragment: BaseFragment(), MainInnerNavigation {
             when(it.itemId) {
                 R.id.action_hashtag -> fragmentManager!!.beginTransaction().replace(
                     R.id.inner_holder,
-                    FragmentHashtag(), "hashtag").commit().let { true }
+                    ir.aliiz.hashtag.FragmentHashtag(), "hashtag").commit().let { true }
                 R.id.action_transaction -> fragmentManager!!.beginTransaction().replace(
                     R.id.inner_holder,
-                    TransactionsFragment(), "transactions").commit().let { true }
+                    ir.aliiz.transaction.TransactionsFragment(), "transactions").commit().let { true }
                 R.id.action_hashtag_amount -> fragmentManager!!.beginTransaction().replace(
                     R.id.inner_holder,
-                    HashtagResultFragment().apply {
+                    ir.aliiz.hashtag.result.HashtagResultFragment().apply {
                         setTargetFragment(this@MainFragment, 123)
                     }, "hashtagAmount").commit().let { true }
                 else -> false
@@ -61,8 +58,4 @@ class MainFragment: BaseFragment(), MainInnerNavigation {
     override fun navigate(directions: NavDirections) {
         findNavController().navigate(directions)
     }
-}
-
-interface MainInnerNavigation {
-    fun navigate(directions: NavDirections)
 }

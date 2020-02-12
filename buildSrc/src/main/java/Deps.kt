@@ -2,6 +2,7 @@
 object Deps {
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
+    val core = "androidx.core:core-ktx:${Versions.core}"
     val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
 
@@ -16,6 +17,10 @@ object Deps {
     val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.livedata}"
     val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.livedata}"
 
+    val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+
+    val material = "com.google.android.material:material:${Versions.material}"
     private object Versions {
         val kotlin = "1.3.50"
         val appCompat = "1.1.0"
@@ -25,6 +30,9 @@ object Deps {
         val junitExt = "1.1.1"
         val espresso = "3.2.0"
         val livedata = "2.2.0"
+        val core = "1.2.0"
+        val navigation = "2.1.0"
+        val material = "1.0.0"
     }
 }
 
@@ -33,4 +41,6 @@ object Modules {
     val local = ":local"
     val repository = ":repository"
     val domain = ":domain"
+    val navigation = ":navigation"
+    val common = ":common"
 }

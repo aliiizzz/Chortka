@@ -5,8 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ir.aliiz.chortka.R
-import ir.aliiz.chortka.presentation.hashtag.FragmentHashtag
-import kotlinx.android.synthetic.main.activity_main.*
+import ir.aliiz.hashtag.FragmentHashtag
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+apply from: "../common.gradle"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Deps.kotlin
+    implementation Deps.appCompat
+    implementation Deps.core
+    implementation Deps.dagger
+    kapt Deps.daggerCompiler
+    implementation Deps.livedata
+    implementation Deps.viewmodel
+    testImplementation Deps.junit
+    androidTestImplementation Deps.junitExt
+    androidTestImplementation Deps.espresso
+    implementation Deps.material
+    implementation Deps.navigationUi
+    implementation Deps.navigationFragment
+    implementation project(Modules.common)
+    implementation project(Modules.domain)
+    implementation project(Modules.navigation)
+}

@@ -1,2 +1,2 @@
-include ':app', ':di', ':local', ':repository', ':domain'
+include ':app', ':di', ':local', ':repository', ':domain', ':hashtag', ':common', ':navigation', ':transaction'
 rootProject.name='Chortka'
