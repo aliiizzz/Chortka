@@ -7,21 +7,21 @@ import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.RemoteInput
 import androidx.core.text.isDigitsOnly
+import ir.aliiz.domain.TransactionRepo
 import ir.aliiz.domain.model.TransactionInfoDomain
-import ir.aliiz.repository.TransactionRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ReplyBroadcastReceiver : BroadcastReceiver() {
-    @Inject lateinit var transactionRepo: ir.aliiz.repository.TransactionRepo
+    @Inject lateinit var transactionRepo: TransactionRepo
 
 
     override fun onReceive(p0: Context?, p1: Intent?) {
-        (p0!!.applicationContext as App).apply {
-            component.inject(this@ReplyBroadcastReceiver)
-        }
+//        (p0!!.applicationContext as App).apply {
+//            component.inject(this@ReplyBroadcastReceiver)
+//        }
         Toast.makeText(p0!!, "test", Toast.LENGTH_LONG).show()
         RemoteInput.getResultsFromIntent(p1).getString("reply_transaction")?.also {
             val words = it.split(" ")

@@ -19,4 +19,5 @@ dependencies {
     implementation project(Modules.common)
     implementation project(Modules.domain)
     implementation project(Modules.navigation)
+    implementation project(Modules.di)
 }

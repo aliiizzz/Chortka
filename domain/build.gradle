@@ -8,4 +8,5 @@ dependencies {
     kapt Deps.daggerCompiler
 
     implementation Deps.livedata
+    implementation project(Modules.di)
 }

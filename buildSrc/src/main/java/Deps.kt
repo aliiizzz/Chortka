@@ -43,4 +43,6 @@ object Modules {
     val domain = ":domain"
     val navigation = ":navigation"
     val common = ":common"
+    val hashtag = ":hashtag"
+    val transaction = ":transaction"
 }

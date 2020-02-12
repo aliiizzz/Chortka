@@ -31,4 +31,8 @@ dependencies {
     implementation project(Modules.local)
     implementation project(Modules.repository)
     implementation project(Modules.domain)
+    implementation project(Modules.hashtag)
+    implementation project(Modules.transaction)
+    implementation project(Modules.common)
+    implementation project(Modules.navigation)
 }

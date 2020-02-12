@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import ir.aliiz.chortka.R
 import ir.aliiz.chortka.presentation.App
-import ir.aliiz.transaction.TransactionsFragment
-import ir.aliiz.common.ViewModelBase
-import ir.aliiz.common.ViewModelFactory
-import ir.aliiz.chortka.presentation.hashtag.BaseFragment
-import ir.aliiz.hashtag.FragmentHashtag
-import ir.aliiz.hashtag.result.HashtagResultFragment
+import ir.aliiz.common.BaseFragment
+import ir.aliiz.common.MainInnerNavigation
+import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
 class MainFragment: BaseFragment(), MainInnerNavigation {
