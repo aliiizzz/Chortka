@@ -11,6 +11,7 @@ import ir.aliiz.common.BaseFragment
 import ir.aliiz.common.ViewModelFactory
 import ir.aliiz.transaction.R
 import ir.aliiz.transaction.TransactionsAdapter
+import ir.aliiz.transaction.di.TransactionComponent
 import kotlinx.android.synthetic.main.fragment_hashtag_result_detail.*
 import javax.inject.Inject
 
@@ -25,9 +26,7 @@ class HashtagResultDetailFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        (activity!!.applicationContext as App).component.apply {
-//            inject(this@HashtagResultDetailFragment)
-//        }
+        TransactionComponent.create(activity!!).inject(this)
         adapter = TransactionsAdapter {
 
         }

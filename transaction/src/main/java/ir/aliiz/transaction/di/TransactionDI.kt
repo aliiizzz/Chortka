@@ -14,16 +14,18 @@ import ir.aliiz.local.di.LocalModule
 import ir.aliiz.repository.di.RepoModule
 import ir.aliiz.transaction.TransactionViewModel
 import ir.aliiz.transaction.TransactionsFragment
+import ir.aliiz.transaction.detail.HashtagResultDetailFragment
 import ir.aliiz.transaction.detail.HashtagResultDetailViewModel
 
 @Component(dependencies = [AppComponent::class], modules = [TransactionModule::class,
     RepoModule::class, LocalModule::class, ViewModelBuilder::class, CommonModule::class])
 interface TransactionComponent {
     fun inject(context: TransactionsFragment)
+    fun inject(context: HashtagResultDetailFragment)
 
     companion object {
         fun create(activity: Activity): TransactionComponent = DaggerTransactionComponent.builder().appComponent(
-            AppComponent.getAppComponent(activity)).build()
+            AppComponent.getAppComponent(activity)).localModule(LocalModule(activity)).build()
     }
 }
 

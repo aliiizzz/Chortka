@@ -27,7 +27,7 @@ interface HashtagComponent {
     fun inject(context: HashtagResultFragment)
     companion object {
         fun create(activity: Activity): HashtagComponent = DaggerHashtagComponent.builder().appComponent(
-            AppComponent.getAppComponent(activity)).build()
+            AppComponent.getAppComponent(activity)).localModule(LocalModule(activity)).build()
     }
 }
 

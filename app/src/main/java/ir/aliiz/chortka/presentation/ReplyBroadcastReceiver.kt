@@ -20,7 +20,7 @@ class ReplyBroadcastReceiver : BroadcastReceiver() {
 
 
     override fun onReceive(p0: Context?, p1: Intent?) {
-        AppModuleComponent.create(null, p0)
+        AppModuleComponent.create(null, p0).inject(this)
         Toast.makeText(p0!!, "test", Toast.LENGTH_LONG).show()
         RemoteInput.getResultsFromIntent(p1).getString("reply_transaction")?.also {
             val words = it.split(" ")
