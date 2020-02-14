@@ -6,7 +6,7 @@ import ir.aliiz.local.model.Hashtag
 import ir.aliiz.local.model.TransactionHashtag
 import ir.aliiz.local.model.TransactionInfo
 
-@Database(entities = [TransactionInfo::class, Hashtag::class, TransactionHashtag::class], version = 1)
+@Database(entities = [TransactionInfo::class, Hashtag::class, TransactionHashtag::class], version = 2)
 abstract class ChortkaDatabase: RoomDatabase() {
     abstract fun transactionDao(): TransactionDao
 }
