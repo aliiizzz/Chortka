@@ -33,4 +33,7 @@ interface TransactionDao {
 
     @Query("select TransactionInfo.id as id, TransactionInfo.amount as amount, TransactionInfo.createdAt as createdAt, Hashtag.title as hashtag from TransactionHashtag left join Hashtag on TransactionHashtag.hashtagTitle = Hashtag.title left join TransactionInfo on TransactionHashtag.transactionId = TransactionInfo.id where hashtag=:hashtag")
     fun getHashtagTransactions(hashtag: String): List<HashtagTransaction>
+
+    @Query("select * from TransactionInfo where id = :param")
+    fun getTransaction(param: String): TransactionInfo
 }

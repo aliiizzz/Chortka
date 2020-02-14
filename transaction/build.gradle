@@ -22,4 +22,6 @@ dependencies {
     implementation project(Modules.di)
     implementation project(Modules.repository)
     implementation project(Modules.local)
+    implementation Deps.constraint
+    implementation project(Modules.domainImpl)
 }

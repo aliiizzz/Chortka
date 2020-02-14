@@ -14,4 +14,5 @@ interface TransactionRepo {
     suspend fun addHashtag(param: HashtagDomain): LiveData<Resource<Unit>>
     suspend fun getHashtagWithAmount(): LiveData<Resource<List<HashtagWithAmountDomain>>>
     suspend fun getHashtagTransactions(hashtag: String): LiveData<Resource<List<TransactionInfoDomain>>>
+    suspend fun getTransaction(param: String): LiveData<Resource<TransactionInfoDomain>>
 }

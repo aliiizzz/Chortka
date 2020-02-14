@@ -1,4 +1,4 @@
-package ir.aliiz.transaction.detail
+package ir.aliiz.transaction.result
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

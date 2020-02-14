@@ -3,9 +3,9 @@ package ir.aliiz.hashtag.result
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ir.aliiz.common.extension.inflate
 import ir.aliiz.domain.model.HashtagWithAmountDomain
 import ir.aliiz.hashtag.R
-import ir.aliiz.hashtag.add.inflate
 import kotlinx.android.synthetic.main.item_hashtag_result.view.*
 
 class HashtagResultAdapter (private val click: (title: String) -> Unit): RecyclerView.Adapter<HashtagResultAdapter.HashtagResultViewHolder>() {

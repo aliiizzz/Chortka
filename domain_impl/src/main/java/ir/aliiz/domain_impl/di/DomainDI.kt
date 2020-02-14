@@ -5,8 +5,10 @@ import dagger.Module
 import dagger.Provides
 import ir.aliiz.di.AppComponent
 import ir.aliiz.domain.TransactionRepo
+import ir.aliiz.domain.usecase.TransactionDetailUseCase
 import ir.aliiz.domain.usecase.UseCaseAddHashtag
 import ir.aliiz.domain.usecase.UseCaseHashtags
+import ir.aliiz.domain_impl.TransactionDetaiUseCaseImpl
 import ir.aliiz.domain_impl.UseCaseAddHashtagImpl
 import ir.aliiz.domain_impl.UseCaseHashtagsImpl
 import ir.aliiz.local.di.LocalModule
@@ -24,4 +26,7 @@ class UseCaseModule {
 
     @Provides
     fun provideAddHashtag(transactionRepo: TransactionRepo): UseCaseAddHashtag = UseCaseAddHashtagImpl(transactionRepo)
+
+    @Provides
+    fun provideTransactionDetailUseCase(transactionRepo: TransactionRepo): TransactionDetailUseCase = TransactionDetaiUseCaseImpl(transactionRepo)
 }

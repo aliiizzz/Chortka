@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import ir.aliiz.chortka.presentation.main.MainFragmentDirections
+import ir.aliiz.common.MainInnerNavigation
 import ir.aliiz.common.ViewModelFactory
 import ir.aliiz.transaction.di.TransactionComponent
 import kotlinx.android.synthetic.main.fragment_transactions.*
@@ -22,6 +24,7 @@ class TransactionsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = TransactionsAdapter {
+            (targetFragment as MainInnerNavigation).navigate(MainFragmentDirections.actionMainToTransactionDetail(it))
         }
         TransactionComponent.create(activity!!).inject(this)
     }

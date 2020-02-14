@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ir.aliiz.common.extension.inflate
 import ir.aliiz.domain.model.HashtagDomain
 import ir.aliiz.hashtag.R
 import kotlinx.android.synthetic.main.item_custom_hashtag.view.*
@@ -25,5 +26,3 @@ class CustomHashtagAdapter(val clickListener: (String) -> Unit) : RecyclerView.A
 }
 
 class CustomHashtagViewHolder(view: View): RecyclerView.ViewHolder(view)
-
-fun ViewGroup.inflate(resId: Int): View = LayoutInflater.from(this.context).inflate(resId, this, false)

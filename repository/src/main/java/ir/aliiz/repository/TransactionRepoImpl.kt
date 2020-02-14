@@ -90,4 +90,18 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: ir.ali
         }
         return result
     }
+
+    override suspend fun getTransaction(param: String): LiveData<Resource<TransactionInfoDomain>> {
+        val result = MutableLiveData<Resource<TransactionInfoDomain>>()
+        try {
+            val tr = transactionDao.getTransaction(param)
+            val hashs = transactionDao.getTransactionHashtags(param)
+            result.postValue(Resource.success(tr.let {
+                TransactionInfoDomain(it.id, hashs, it.amount)
+            }))
+        } catch (e: Exception) {
+            result.postValue(Resource.error(ErrorInfoDomain(e)))
+        }
+        return result
+    }
 }

@@ -21,6 +21,7 @@ object Deps {
     val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
 
     val material = "com.google.android.material:material:${Versions.material}"
+    val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraint}"
     private object Versions {
         val kotlin = "1.3.50"
         val appCompat = "1.1.0"
@@ -33,6 +34,7 @@ object Deps {
         val core = "1.2.0"
         val navigation = "2.1.0"
         val material = "1.0.0"
+        val constraint = "1.1.3"
     }
 }
 

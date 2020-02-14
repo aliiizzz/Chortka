@@ -16,6 +16,15 @@
                 android:name="id"
                 app:argType="string"/>
         </action>
+        <action
+            android:id="@+id/action_main_to_transaction_detail"
+            app:destination="@id/fragment_transaction_detail"
+            >
+            <argument
+                android:name="id"
+                app:argType="string"
+                />
+        </action>
 
     </fragment>
     <fragment
@@ -23,10 +32,19 @@
         android:name="ir.aliiz.hashtag.add.AddHashtagFragment"/>
     <fragment
         android:id="@+id/fragment_hashtag_result_detail"
-        android:name="ir.aliiz.transaction.detail.HashtagResultDetailFragment"
+        android:name="ir.aliiz.transaction.result.HashtagResultDetailFragment"
         >
         <argument
             android:name="id"
             app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_transaction_detail"
+        android:name="ir.aliiz.transaction.detail.TransactionDetailFragment"
+        >
+        <argument
+            android:name="id"
+            app:argType="string"
+            />
     </fragment>
 </navigation>
