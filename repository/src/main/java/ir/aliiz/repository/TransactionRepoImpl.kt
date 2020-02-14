@@ -3,10 +3,13 @@ package ir.aliiz.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ir.aliiz.domain.model.*
+import ir.aliiz.local.TransactionDao
+import ir.aliiz.local.model.Hashtag
+import ir.aliiz.local.model.TransactionHashtag
 import java.util.*
 import javax.inject.Inject
 
-class TransactionRepoImpl @Inject constructor(private val transactionDao: ir.aliiz.local.TransactionDao):
+class TransactionRepoImpl @Inject constructor(private val transactionDao: TransactionDao):
     ir.aliiz.domain.TransactionRepo {
     override suspend fun addTransaction(param: TransactionInfoDomain) {
         val id = UUID.randomUUID().toString()
@@ -105,9 +108,23 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: ir.ali
         return result
     }
 
-    override suspend fun removeHashtag(param: RemoveHashtagDomain): LiveData<Resource<Unit>> = MutableLiveData<Resource<Unit>>().apply {
+    override suspend fun removeHashtag(param: HashtagInfoDomain): LiveData<Resource<Unit>> = MutableLiveData<Resource<Unit>>().apply {
         try {
             transactionDao.removeHashtag(param.transactionId, param.hashtag)
+            postValue(Resource.success(Unit))
+        } catch (e: Exception) {
+            postValue(Resource.error(ErrorInfoDomain(e)))
+        }
+    }
+
+    override suspend fun addTransactionHashtag(param: HashtagInfoDomain): LiveData<Resource<Unit>> = MutableLiveData<Resource<Unit>>().apply {
+        try {
+            transactionDao.addHashtag(Hashtag(param.hashtag, 0, null))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        try {
+            transactionDao.addTransactionHashtag(TransactionHashtag(0, param.hashtag, param.transactionId))
             postValue(Resource.success(Unit))
         } catch (e: Exception) {
             postValue(Resource.error(ErrorInfoDomain(e)))

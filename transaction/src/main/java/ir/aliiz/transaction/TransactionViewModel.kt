@@ -8,8 +8,6 @@ import ir.aliiz.domain.model.TransactionInfoDomain
 import ir.aliiz.common.AppDispatchers
 import ir.aliiz.common.ViewModelBase
 import ir.aliiz.domain.TransactionRepo
-import ir.aliiz.navigation.model.NavigationDirection
-import ir.aliiz.navigation.model.To
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

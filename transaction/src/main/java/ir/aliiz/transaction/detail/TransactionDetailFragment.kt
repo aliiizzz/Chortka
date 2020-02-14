@@ -48,5 +48,9 @@ class TransactionDetailFragment : BaseFragment() {
             }
             adapter.notifyDataSetChanged()
         })
+
+        button_transaction_detail_add_hashtag.setOnClickListener {
+            viewmodel.addHashtag(args.id, edit_text_transaction_detail_add_hashtag.text.toString())
+        }
     }
 }

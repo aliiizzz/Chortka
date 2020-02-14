@@ -6,9 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import ir.aliiz.common.AppDispatchers
 import ir.aliiz.common.ViewModelBase
-import ir.aliiz.domain.model.RemoveHashtagDomain
+import ir.aliiz.domain.model.HashtagInfoDomain
 import ir.aliiz.domain.model.Resource
 import ir.aliiz.domain.model.TransactionInfoDomain
+import ir.aliiz.domain.usecase.AddHashtagUseCase
 import ir.aliiz.domain.usecase.RemoveHashtagUseCase
 import ir.aliiz.domain.usecase.TransactionDetailUseCase
 import kotlinx.coroutines.launch
@@ -18,8 +19,10 @@ import javax.inject.Inject
 class TransactionDetailViewModel @Inject constructor(
     private val transactionDetailUseCase: TransactionDetailUseCase,
     private val appDispatchers: AppDispatchers,
-    private val removeHashtagUseCase: RemoveHashtagUseCase
+    private val removeHashtagUseCase: RemoveHashtagUseCase,
+    private val addHashtagUseCase: AddHashtagUseCase
 ) : ViewModelBase() {
+    private var addResult: LiveData<Resource<Unit>> = MutableLiveData()
     private var remove: LiveData<Resource<Unit>> = MutableLiveData()
     private lateinit var result: LiveData<Resource<TransactionInfoDomain>>
 
@@ -45,7 +48,7 @@ class TransactionDetailViewModel @Inject constructor(
             val transaction = _detail.value
             _detail.removeSource(remove)
             withContext(appDispatchers.io) {
-                remove = removeHashtagUseCase.executeSuspend(RemoveHashtagDomain(transaction!!.id, id))
+                remove = removeHashtagUseCase.executeSuspend(HashtagInfoDomain(transaction!!.id, id))
             }
 
             _detail.addSource(remove) {
@@ -53,6 +56,26 @@ class TransactionDetailViewModel @Inject constructor(
                     _detail.value = _detail.value!!.let {
                         it.copy(hashtags = it.hashtags.toMutableList().apply {
                             remove(id)
+                        }.toList())
+                    }
+                }
+            }
+        }
+    }
+
+    fun addHashtag(id: String, hashtag: String) {
+        if (hashtag.isEmpty()) return
+        viewModelScope.launch {
+            _detail.removeSource(addResult)
+            withContext(appDispatchers.io) {
+                addResult = addHashtagUseCase.executeSuspend(HashtagInfoDomain(id, hashtag))
+            }
+
+            _detail.addSource(addResult) {
+                if (it.status == Resource.Status.SUCCESS) {
+                    _detail.value = _detail.value!!.let {
+                        it.copy(hashtags = it.hashtags.toMutableList().apply {
+                            add(hashtag)
                         }.toList())
                     }
                 }
