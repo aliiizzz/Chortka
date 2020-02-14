@@ -104,4 +104,13 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: ir.ali
         }
         return result
     }
+
+    override suspend fun removeHashtag(param: RemoveHashtagDomain): LiveData<Resource<Unit>> = MutableLiveData<Resource<Unit>>().apply {
+        try {
+            transactionDao.removeHashtag(param.transactionId, param.hashtag)
+            postValue(Resource.success(Unit))
+        } catch (e: Exception) {
+            postValue(Resource.error(ErrorInfoDomain(e)))
+        }
+    }
 }

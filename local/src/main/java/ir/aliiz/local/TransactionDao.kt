@@ -36,4 +36,7 @@ interface TransactionDao {
 
     @Query("select * from TransactionInfo where id = :param")
     fun getTransaction(param: String): TransactionInfo
+
+    @Query("delete from TransactionHashtag where hashtagTitle = :hashtag and transactionId = :transactionId")
+    fun removeHashtag(transactionId: String, hashtag: String)
 }

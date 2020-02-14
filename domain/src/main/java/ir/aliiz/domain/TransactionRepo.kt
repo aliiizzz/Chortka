@@ -1,10 +1,7 @@
 package ir.aliiz.domain
 
 import androidx.lifecycle.LiveData
-import ir.aliiz.domain.model.HashtagDomain
-import ir.aliiz.domain.model.HashtagWithAmountDomain
-import ir.aliiz.domain.model.Resource
-import ir.aliiz.domain.model.TransactionInfoDomain
+import ir.aliiz.domain.model.*
 
 interface TransactionRepo {
     suspend fun addTransaction(param: TransactionInfoDomain)
@@ -15,4 +12,5 @@ interface TransactionRepo {
     suspend fun getHashtagWithAmount(): LiveData<Resource<List<HashtagWithAmountDomain>>>
     suspend fun getHashtagTransactions(hashtag: String): LiveData<Resource<List<TransactionInfoDomain>>>
     suspend fun getTransaction(param: String): LiveData<Resource<TransactionInfoDomain>>
+    suspend fun removeHashtag(param: RemoveHashtagDomain): LiveData<Resource<Unit>>
 }

@@ -24,7 +24,11 @@ class TransactionDetailFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = TransactionHashtagAdapter()
+        adapter = TransactionHashtagAdapter { type, id ->
+            when (type) {
+                TransactionHashtagAdapter.TransactionHashtagType.REMOVE -> viewmodel.removeHashtag(id)
+            }
+        }
         TransactionComponent.create(activity!!).inject(this)
     }
 
