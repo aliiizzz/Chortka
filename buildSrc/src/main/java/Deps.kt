@@ -9,6 +9,7 @@ object Deps {
     val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+    val roomTest = "androidx.room:room-testing:${Versions.room}"
 
     val junit = "junit:junit:${Versions.junit}"
     val junitExt = "androidx.test.ext:junit:${Versions.junitExt}"

@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import ir.aliiz.di.AppComponent
 import ir.aliiz.local.migration_1_to_2
+import ir.aliiz.local.migration_2_to_3
 
 @Component(dependencies = [AppComponent::class], modules = [LocalModule::class])
 interface LocalComponent
@@ -15,7 +16,7 @@ interface LocalComponent
 class LocalModule(val context: Context) {
     @Provides
     fun provideAppDatabase(): ir.aliiz.local.ChortkaDatabase = Room.databaseBuilder(context, ir.aliiz.local.ChortkaDatabase::class.java, "chortka")
-        .addMigrations(migration_1_to_2).build()
+        .addMigrations(migration_1_to_2, migration_2_to_3).build()
 
     @Provides
     fun provideTransactionDao(db: ir.aliiz.local.ChortkaDatabase) = db.transactionDao()
