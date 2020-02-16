@@ -18,7 +18,7 @@ data class Hashtag(@PrimaryKey val title: String, val type: Int)
     ForeignKey(entity = Hashtag::class, parentColumns = ["title"], childColumns = ["child"]),
     ForeignKey(entity = Hashtag::class, parentColumns = ["title"], childColumns = ["parent"])
 ])
-data class HashtagHashtag(@PrimaryKey val id: Int,
+data class HashtagHashtag(@PrimaryKey(autoGenerate = true) val id: Int,
                           val child: String,
                           val parent: String)
 
@@ -26,6 +26,6 @@ data class HashtagHashtag(@PrimaryKey val id: Int,
 data class TransactionHashtag(@PrimaryKey(autoGenerate = true) val id: Long, val hashtagTitle: String, val transactionId: String)
 
 
-data class HashtagWithAmount(val title: String, val type: Int, val formula: String?, val amount: Long)
+data class HashtagWithAmount(val title: String, val type: Int, val amount: Long)
 
 data class HashtagTransaction(val id: String, val amount: Long, val createdAt: Long, val hashtag: String)

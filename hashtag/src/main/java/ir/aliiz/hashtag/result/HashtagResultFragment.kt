@@ -1,11 +1,13 @@
 package ir.aliiz.hashtag.result
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import ir.aliiz.chortka.presentation.main.MainFragmentDirections
 import ir.aliiz.common.BaseFragment
 import ir.aliiz.common.MainInnerNavigation
@@ -21,6 +23,7 @@ class HashtagResultFragment: BaseFragment() {
     private lateinit var adapter: HashtagResultAdapter
     @Inject lateinit var factory: ViewModelFactory
     private val viewmodel by viewModels<HashtagResultViewModel> { factory }
+    private val args by navArgs<HashtagResultFragmentArgs>()
 
     override fun getViewModel(): ViewModelBase = viewmodel
 
@@ -45,6 +48,10 @@ class HashtagResultFragment: BaseFragment() {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })
-        viewmodel.getResult()
+        viewmodel.sum.observe(this, Observer {
+            text_view_hashtag_result_title.text = it.title
+            text_view_hashtag_result_amount.text = it.amount.toString()
+        })
+        viewmodel.getResult(args.id)
     }
 }

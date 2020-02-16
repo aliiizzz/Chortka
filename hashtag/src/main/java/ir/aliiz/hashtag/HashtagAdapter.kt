@@ -29,6 +29,9 @@ class HashtagAdapter(val clickListener: (title: String, type: Int) -> Unit): Rec
                 val item = items[this.adapterPosition]
                 clickListener.invoke(item.title, 1)
             }
+            itemView.text_view_hashtag_title.setOnClickListener {
+                clickListener.invoke(items[adapterPosition].title, 3)
+            }
         }
 
     override fun getItemCount(): Int = items.count()

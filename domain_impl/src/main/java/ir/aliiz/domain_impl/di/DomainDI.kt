@@ -31,4 +31,10 @@ class UseCaseModule {
 
     @Provides
     fun provideAddTransactionHashtag(transactionRepo: TransactionRepo): AddHashtagUseCase = AddHashtagUseCaseImpl(transactionRepo)
+
+    @Provides
+    fun provideSum(transactionRepo: TransactionRepo): HashtagSumUseCase = HashtagSumUseCaseImpl(transactionRepo)
+
+    @Provides
+    fun provideRelations(transactionRepo: TransactionRepo): HashtagRelationsUseCase = HashtagRelationsUseCaseImpl(transactionRepo)
 }

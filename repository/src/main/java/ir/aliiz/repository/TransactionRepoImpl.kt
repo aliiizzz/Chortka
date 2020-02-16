@@ -2,27 +2,29 @@ package ir.aliiz.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import ir.aliiz.domain.TransactionRepo
 import ir.aliiz.domain.model.*
 import ir.aliiz.local.TransactionDao
 import ir.aliiz.local.model.Hashtag
+import ir.aliiz.local.model.HashtagHashtag
 import ir.aliiz.local.model.TransactionHashtag
+import ir.aliiz.local.model.TransactionInfo
 import java.util.*
 import javax.inject.Inject
 
-class TransactionRepoImpl @Inject constructor(private val transactionDao: TransactionDao):
-    ir.aliiz.domain.TransactionRepo {
+class TransactionRepoImpl @Inject constructor(private val transactionDao: TransactionDao): TransactionRepo {
     override suspend fun addTransaction(param: TransactionInfoDomain) {
         val id = UUID.randomUUID().toString()
         transactionDao.addTransaction(
-            ir.aliiz.local.model.TransactionInfo(
+            TransactionInfo(
                 id,
                 param.amount,
                 System.currentTimeMillis()
             )
         )
         param.hashtags.forEach {
-            transactionDao.addHashtag(ir.aliiz.local.model.Hashtag(it, 0, null))
-            transactionDao.addTransactionHashtag(ir.aliiz.local.model.TransactionHashtag(0, it, id))
+            transactionDao.addHashtag(Hashtag(it, 0))
+            transactionDao.addTransactionHashtag(TransactionHashtag(0, it, id))
         }
     }
 
@@ -36,15 +38,14 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: Transa
         return result
     }
     override suspend fun getHashtags(): List<HashtagDomain> = transactionDao.getHashtags().map {
-        HashtagDomain(it.title, it.type, null)
+        HashtagDomain(it.title, it.type, listOf())
     }
 
     override suspend fun updateHashtag(id: HashtagDomain) {
         transactionDao.updateHashtag(id.let {
-            ir.aliiz.local.model.Hashtag(
+            Hashtag(
                 it.title,
-                it.type,
-                null
+                it.type
             )
         })
     }
@@ -53,12 +54,14 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: Transa
         val result = MutableLiveData<Resource<Unit>>()
         try {
             transactionDao.addHashtag(param.let {
-                ir.aliiz.local.model.Hashtag(
+                Hashtag(
                     it.title,
-                    it.type,
-                    it.formula
+                    it.type
                 )
             })
+            param.childs.forEach {
+                transactionDao.addHashtagHashtag(HashtagHashtag(0, it.title, param.title))
+            }
             result.postValue(Resource.success(Unit))
         } catch (e: Exception) {
             result.postValue(Resource.error(ErrorInfoDomain(e)))
@@ -66,13 +69,15 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: Transa
         return result
     }
 
-    override suspend fun getHashtagWithAmount(): LiveData<Resource<List<HashtagWithAmountDomain>>> {
-        val result = MutableLiveData<Resource<List<HashtagWithAmountDomain>>>()
+    override suspend fun getHashtagWithAmount(id: String): LiveData<Resource<HashtagWithAmountDomain>> {
+        val result = MutableLiveData<Resource<HashtagWithAmountDomain>>()
         try {
-            val res = transactionDao.getHashtagsWithAmount()
-            result.postValue(Resource.success<List<HashtagWithAmountDomain>>(res.map {
-                HashtagWithAmountDomain(it.title, it.type, it.formula, it.amount)
-            }))
+            val res = transactionDao.getHashtagsWithAmount(id)
+            result.postValue(Resource.success<HashtagWithAmountDomain>(
+                res.let {
+                    HashtagWithAmountDomain(it.title, it.type, it.amount)
+                }
+            ))
         } catch (e: Exception) {
             e.printStackTrace()
             result.postValue(Resource.error(ErrorInfoDomain(e)))
@@ -119,7 +124,7 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: Transa
 
     override suspend fun addTransactionHashtag(param: HashtagInfoDomain): LiveData<Resource<Unit>> = MutableLiveData<Resource<Unit>>().apply {
         try {
-            transactionDao.addHashtag(Hashtag(param.hashtag, 0, null))
+            transactionDao.addHashtag(Hashtag(param.hashtag, 0))
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -130,4 +135,14 @@ class TransactionRepoImpl @Inject constructor(private val transactionDao: Transa
             postValue(Resource.error(ErrorInfoDomain(e)))
         }
     }
+
+    override suspend fun getHashtagRelations(param: String): LiveData<Resource<List<String>>> =
+        MutableLiveData<Resource<List<String>>>().apply {
+            try {
+                val res = transactionDao.getHashtagRelations(param)
+                postValue(Resource.success(res))
+            } catch (e: Exception) {
+                postValue(Resource.error(ErrorInfoDomain(e)))
+            }
+        }
 }

@@ -57,8 +57,8 @@ class AddHashtagViewModel @Inject constructor(
 
         viewModelScope.launch {
             withContext(appDispatchers.io) {
-                val value = (_hashtag.value ?: listOf()).joinToString(",")
-                addHashtagResult = useCaseAddHashtag.executeSuspend(HashtagDomain(hashtag, 0, value))
+                val childs = (_hashtag.value ?: listOf()).map { HashtagDomain(it, 0, listOf()) }
+                addHashtagResult = useCaseAddHashtag.executeSuspend(HashtagDomain(hashtag, 0, childs))
             }
             navigate(Back())
         }

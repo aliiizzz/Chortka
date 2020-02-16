@@ -11,6 +11,7 @@ import ir.aliiz.common.BaseFragment
 import ir.aliiz.common.ViewModelBase
 import ir.aliiz.common.ViewModelFactory
 import ir.aliiz.hashtag.R
+import ir.aliiz.hashtag.di.HashtagComponent
 import kotlinx.android.synthetic.main.fragment_add_hashtag.*
 import javax.inject.Inject
 
@@ -25,9 +26,7 @@ class AddHashtagFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        (context!!.applicationContext as App).component.apply {
-//            inject(this@AddHashtagFragment)
-//        }
+        HashtagComponent.create(activity!!).inject(this)
         adapter = CustomHashtagAdapter {
             viewmodel.addHashtag(it)
         }

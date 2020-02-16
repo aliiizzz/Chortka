@@ -48,11 +48,6 @@ class MainFragment: BaseFragment(), MainInnerNavigation {
                     TransactionsFragment().apply {
                         setTargetFragment(this@MainFragment, 123)
                     }, "transactions").commit().let { true }
-                R.id.action_hashtag_amount -> fragmentManager!!.beginTransaction().replace(
-                    R.id.inner_holder,
-                    HashtagResultFragment().apply {
-                        setTargetFragment(this@MainFragment, 123)
-                    }, "hashtagAmount").commit().let { true }
                 else -> false
             }
         }

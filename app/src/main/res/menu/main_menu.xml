@@ -4,7 +4,4 @@
         android:title="Transactions"/>
     <item android:id="@+id/action_hashtag"
         android:title="Hashtags"/>
-    <item
-        android:id="@+id/action_hashtag_amount"
-        android:title="Result"/>
 </menu>

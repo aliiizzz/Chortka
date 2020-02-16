@@ -13,6 +13,7 @@ import ir.aliiz.di.AppComponent
 import ir.aliiz.domain_impl.di.UseCaseModule
 import ir.aliiz.hashtag.FragmentHashtag
 import ir.aliiz.hashtag.ViewModelHashtag
+import ir.aliiz.hashtag.add.AddHashtagFragment
 import ir.aliiz.hashtag.add.AddHashtagViewModel
 import ir.aliiz.hashtag.result.HashtagResultFragment
 import ir.aliiz.hashtag.result.HashtagResultViewModel
@@ -25,6 +26,7 @@ import ir.aliiz.repository.di.RepoModule
 interface HashtagComponent {
     fun inject(context: FragmentHashtag)
     fun inject(context: HashtagResultFragment)
+    fun inject(context: AddHashtagFragment)
     companion object {
         fun create(activity: Activity): HashtagComponent = DaggerHashtagComponent.builder().appComponent(
             AppComponent.getAppComponent(activity)).localModule(LocalModule(activity)).build()

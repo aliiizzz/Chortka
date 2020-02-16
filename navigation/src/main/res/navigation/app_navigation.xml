@@ -26,6 +26,14 @@
                 />
         </action>
 
+        <action
+            android:id="@+id/action_main_to_hashtag_result"
+            app:destination="@id/fragment_hashtag_result">
+            <argument
+                android:name="id"
+                app:argType="string"
+                />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/fragment_add_hashtag"
@@ -41,6 +49,15 @@
     <fragment
         android:id="@+id/fragment_transaction_detail"
         android:name="ir.aliiz.transaction.detail.TransactionDetailFragment"
+        >
+        <argument
+            android:name="id"
+            app:argType="string"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_hashtag_result"
+        android:name="ir.aliiz.hashtag.result.HashtagResultFragment"
         >
         <argument
             android:name="id"

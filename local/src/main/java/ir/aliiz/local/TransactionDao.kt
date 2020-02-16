@@ -20,8 +20,9 @@ interface TransactionDao {
     @Query("select * from Hashtag")
     fun getHashtags(): List<Hashtag>
 
-    @Query("select title, type, sum(amount) as amount from TransactionHashtag left join Hashtag on TransactionHashtag.hashtagTitle = Hashtag.title left join TransactionInfo on TransactionHashtag.transactionId = TransactionInfo.id group by title")
-    fun getHashtagsWithAmount(): List<HashtagWithAmount>
+    @Query("select title, type, sum(amount) as amount from TransactionHashtag left join Hashtag on TransactionHashtag.hashtagTitle = Hashtag.title left join TransactionInfo on TransactionHashtag.transactionId = TransactionInfo.id  where title = :id group by title")
+    fun getHashtagsWithAmount(id: String): HashtagWithAmount
+
     @Update
     fun updateHashtag(param: Hashtag)
 
@@ -42,4 +43,10 @@ interface TransactionDao {
 
     @Query("delete from TransactionHashtag where hashtagTitle = :title")
     fun temp(title: String = "somethibg")
+
+    @Query("select parent from HashtagHashtag where child = :child")
+    fun getHashtagRelations(child: String): List<String>
+
+    @Insert
+    fun addHashtagHashtag(hash: HashtagHashtag)
 }

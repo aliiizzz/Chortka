@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
+import ir.aliiz.chortka.presentation.main.MainFragmentDirections
 import ir.aliiz.domain.model.HashtagDomain
 import ir.aliiz.common.Switch
 import ir.aliiz.common.ViewModelBase
@@ -35,6 +36,10 @@ class ViewModelHashtag @Inject constructor(private val transactionRepo: Transact
     }
 
     fun updateHashtag(title: String, type: Int) {
+        if (type == 3) {
+            _innerNav.value = Switch(MainFragmentDirections.actionMainToHashtagResult(title), null)
+            return
+        }
         CoroutineScope(Dispatchers.Main).launch {
 
             items.value?.first { it.title == title }?.copy(type = type)?.also { item ->
@@ -53,7 +58,7 @@ class ViewModelHashtag @Inject constructor(private val transactionRepo: Transact
     }
 
     fun addClicked() {
-//        _innerNav.value = Switch.nullSwitch(Mainfram)
+        _innerNav.value = Switch.nullSwitch(MainFragmentDirections.actionMainToAddHashtag())
     }
 
 
